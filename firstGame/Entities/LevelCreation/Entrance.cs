@@ -13,24 +13,32 @@ namespace firstgame.Entities.LevelCreation
         public void CreateEntrance(Direction direction, Level level) {
             if(direction == Direction.Up)
             {
-                level.positions[5, 0].State = World.PositionState.Path;
-                level.positions[6, 0].State = World.PositionState.Path;
+                for (int i = 0; i < 5; i++) {
+                    level.positions[5, i].State = World.PositionState.Path;
+                    level.positions[6, i].State = World.PositionState.Path;
+                }
             }
             if (direction == Direction.Down)
             {
-                level.positions[5, 7].State = World.PositionState.Path;
-                level.positions[6, 7].State = World.PositionState.Path;
-                
+                for (int i = 3; i <= 7; i++)
+                {
+                    level.positions[5, i].State = World.PositionState.Path;
+                    level.positions[6, i].State = World.PositionState.Path;
+                }
             }
             if (direction == Direction.Left)
             {
-                level.positions[0, 3].State = World.PositionState.Path;
-                level.positions[0, 4].State = World.PositionState.Path;
+                for (int i = 0; i <= 6; i++) {
+                    level.positions[i, 3].State = World.PositionState.Path;
+                    level.positions[i, 4].State = World.PositionState.Path;
+                }
             }
             if (direction == Direction.Right)
             {
-                level.positions[11, 3].State = World.PositionState.Path;
-                level.positions[11, 4].State = World.PositionState.Path;
+                for (int i = 5; i <= 11; i++) {
+                    level.positions[i, 3].State = World.PositionState.Path;
+                    level.positions[i, 4].State = World.PositionState.Path;
+                }
             }
         }
     }

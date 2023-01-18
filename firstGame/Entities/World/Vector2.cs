@@ -10,20 +10,14 @@ namespace firstgame.Entities.World
     {
         private int X, Y;
 
-        public int x
-        {
-            get => X;
-        }
+        public int x;
 
-        public int y
-        {
-            get => Y;
-        }
+        public int y;
 
         public Vector2(int x, int y)
         {
-            X = x;
-            Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         public static bool operator ==(Vector2 left, Vector2 right)

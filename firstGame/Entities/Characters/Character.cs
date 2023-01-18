@@ -10,6 +10,8 @@ namespace firstgame.Entities.Characters
     internal class Character    
     {
         public int health { get; private set; }
+
+        public int damage { get; private set; }
         public string name { get; private set; }
         public Position position { get; private set; }
 

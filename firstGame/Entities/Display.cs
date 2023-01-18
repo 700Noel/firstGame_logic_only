@@ -1,4 +1,5 @@
-﻿using firstgame.Entities.World;
+﻿using firstgame.Entities.Characters;
+using firstgame.Entities.World;
 using firstgame.Extensions;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,24 @@ namespace firstgame.Entities
 {
     internal class Display
     {
+        PositionState currentState;
 
-        public void Draw(Map map)
+        public void Draw(Map map, Player player)
         {
+            map.currentLevel.SetplayerPosition(player);
+
             for (int y = 0; y < map.currentLevel.size.y; y++)
             {
                 for (int x = 0; x < map.currentLevel.size.x; x++)
                 {
-                    PositionState currentState = map.currentLevel.GetPosition(y, x).State;
+                    if (y == player.getY() && x == player.getX())
+                    {
+                        currentState = PositionState.Player;
+                    }
+                    else
+                    {
+                        currentState = map.currentLevel.GetPosition(y, x).State;
+                    }
                     Console.Write(currentState.AsString());
                 }
                 Console.WriteLine();

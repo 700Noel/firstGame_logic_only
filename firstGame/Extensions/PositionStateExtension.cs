@@ -13,11 +13,11 @@ namespace firstgame.Extensions
         {
             return state switch
             {
-                PositionState.Empty => ".",
-                PositionState.Player => "O",
-                PositionState.Enemy => "X",
-                PositionState.Obstacle => "T",
-                PositionState.Path => "_",
+                PositionState.Empty => ". ",
+                PositionState.Player => "O ",
+                PositionState.Enemy => "X ",
+                PositionState.Obstacle => "T ",
+                PositionState.Path => "_ ",
                 _ => ""
             };
         }
