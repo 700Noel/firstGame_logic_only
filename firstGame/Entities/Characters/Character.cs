@@ -12,12 +12,10 @@ namespace firstgame.Entities.Characters
         public int health { get; private set; }
 
         public int damage { get; private set; }
-        public string name { get; private set; }
         public Position position { get; private set; }
 
-        public Character(string name, int health, Position position) 
+        public Character(int health, Position position) 
         {
-            this.name = name;
             this.health = health;   
             this.position = position;
         }

@@ -15,7 +15,9 @@ namespace firstgame.Entities
 
         public void Draw(Map map, Player player)
         {
+            Console.Clear();
             map.currentLevel.SetPlayerData(player);
+            map.currentLevel.GiveMap(map);
 
             for (int y = 0; y < map.currentLevel.size.y; y++)
             {

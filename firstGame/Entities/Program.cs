@@ -15,8 +15,10 @@ namespace firstgame.Entities
             Map map = new MapCreator().GetMap();
 
 
+
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
+
 
             
 
@@ -47,10 +49,13 @@ namespace firstgame.Entities
                         map.currentLevel.MovePlayer(Direction.Left); break;
                     case ConsoleKey.RightArrow:
                         map.currentLevel.MovePlayer(Direction.Right); break;
+                    /*case ConsoleKey.Spacebar:
+                        player.Attack();
+                        break;*/
 
                 }
 
-                Console.Clear();
+                
 
 
             }

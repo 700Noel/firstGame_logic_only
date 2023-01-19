@@ -12,6 +12,12 @@ namespace firstgame.Entities.Characters
     {
         public Weapon weapon { get; private set; }
 
+        public Direction direction { get; private set; }
+
+        public string name { get; private set; }
+
+        Level level;
+
         public int damage { get; private set; }
 
         private int health;
@@ -25,6 +31,11 @@ namespace firstgame.Entities.Characters
         public void SetWeapon(Weapon currentWeapon)
         {
             this.weapon = currentWeapon;
+        }
+
+        public void getLevel(Level currentLevel)
+        {
+            level = currentLevel;
         }
 
         public int Attack(Enemy enemy)
@@ -45,9 +56,10 @@ namespace firstgame.Entities.Characters
         }
 
         public Player(string name, int health, Position startPosition)
-            :base(name, health, startPosition) 
+            :base(health, startPosition) 
         {
             currentPosition = startPosition;
+            this.name = name;
         }
 
         public int getX()

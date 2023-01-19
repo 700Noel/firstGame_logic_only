@@ -10,10 +10,13 @@ namespace firstgame.Entities.Characters
     internal class Enemy : Character
     {
         public int damage { get; private set; }
-        public Enemy(string name, int health, Position position, int damage)
-            : base(name, health, position)
+
+        public byte id { get; private set; }
+        public Enemy(byte id, int health, Position position, int damage)
+            : base(health, position)
         {
             this.damage = damage;
+            this.id = id;
         }
         
     }

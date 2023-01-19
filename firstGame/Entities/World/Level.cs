@@ -18,6 +18,8 @@ namespace firstgame.Entities
 
         private Player playerData;
 
+        private Map worldMap;
+
         public Position GetPosition(int x, int y)
         {
             return positions[y, x];
@@ -29,43 +31,58 @@ namespace firstgame.Entities
             PlayerPosition = player.position.worldPosition;
         }
 
-        public void MovePlayer(Direction direction)
+        public void GiveMap(Map map)
         {
-            Move(direction, PlayerPosition);
+            worldMap = map;
         }
 
-        public void Move(Direction direction, Vector2 CharacterPosition)
+        
+        public void MovePlayer(Direction direction)
         {
-            if (CharacterPosition is null) throw new Exception("Player Position was null");
+            if (PlayerPosition is null) throw new Exception("Player Position was null");
 
             switch (direction)
             {
                 case Direction.Left:
-                    if (CheckCanMove(new Vector2(CharacterPosition.x - 1, CharacterPosition.y)))
+                    if (PlayerPosition.x - 1 < 0)
                     {
-                        CharacterPosition.x--;
-                    }
+                        PlayerPosition.x = size.x - 1;
+                        worldMap.setCurrentLevel(-1);
+                    } else if (CheckCanMove(new Vector2(PlayerPosition.x - 1, PlayerPosition.y)))
+                    { PlayerPosition.x--; }
                     break;
+
                 case Direction.Right:
-                    if (CheckCanMove(new Vector2(CharacterPosition.x + 1, CharacterPosition.y)))
+                    if (PlayerPosition.x + 1 >= size.x)
                     {
-                        CharacterPosition.x++;
-                    }
+                        PlayerPosition.x = 0;
+                        worldMap.setCurrentLevel(1);
+                    } else if (CheckCanMove(new Vector2(PlayerPosition.x + 1, PlayerPosition.y)))
+                    { PlayerPosition.x++; }
                     break;
+
                 case Direction.Up:
-                    if (CheckCanMove(new Vector2(CharacterPosition.x, CharacterPosition.y - 1)))
+                    if (PlayerPosition.y - 1 < 0)
                     {
-                        CharacterPosition.y--;
-                    }
+                        PlayerPosition.y = size.y - 1;
+                        worldMap.setCurrentLevel(-3);
+                    } else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y - 1)))
+                    { PlayerPosition.y--; }
                     break;
+
                 case Direction.Down:
-                    if (CheckCanMove(new Vector2(CharacterPosition.x, CharacterPosition.y + 1)))
+                    if (PlayerPosition.y + 1 >= size.y)
                     {
-                        CharacterPosition.y++;
-                    }
+                        PlayerPosition.y = 0;
+                        worldMap.setCurrentLevel(3);
+
+                    } else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y + 1)))
+                    { PlayerPosition.y++; }
                     break;
             }
         }
+
+
 
         public bool CheckCanMove(Vector2 position)
         {

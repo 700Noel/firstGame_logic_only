@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using firstgame.Entities.Characters;
 
 namespace firstgame.Entities.World.MapCreation.Levels
 {
@@ -23,7 +24,9 @@ namespace firstgame.Entities.World.MapCreation.Levels
             level.positions[6, 3].State = PositionState.Obstacle;
             level.positions[6, 4].State = PositionState.Obstacle;
             level.positions[8, 1].State = PositionState.Enemy;
-            
+
+            Enemy enemy1 = new Enemy(1, 20, new Position(new Vector2(8,1), 2), 5);
+
             return level; 
         }
     }

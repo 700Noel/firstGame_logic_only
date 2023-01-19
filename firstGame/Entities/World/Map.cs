@@ -11,6 +11,7 @@ namespace firstgame.Entities.World
         public Vector2 playerPosition { get; private set; }
 
         public Level currentLevel { get; private set; }
+        private int levelID = 0;
 
         public List<Level> levels { get; private set; } = new List<Level>();
 
@@ -20,9 +21,10 @@ namespace firstgame.Entities.World
             currentLevel = levels[0];
         }
 
-        public void setCurrentLevel()
+        public void setCurrentLevel(int next)
         {
-            currentLevel = levels[1];
+            levelID += next;
+            currentLevel = levels[levelID];
         }
     }
 }
