@@ -13,11 +13,15 @@ namespace firstgame.Entities
     {
         PositionState currentState;
 
+        bool newMap = false;
+
         public void Draw(Map map, Player player)
         {
             Console.Clear();
             map.currentLevel.SetPlayerData(player);
             map.currentLevel.GiveMap(map);
+
+
 
             for (int y = 0; y < map.currentLevel.size.y; y++)
             {
@@ -26,6 +30,8 @@ namespace firstgame.Entities
                     if (y == player.getY() && x == player.getX())
                     {
                         currentState = PositionState.Player;
+                    } else if(map.currentLevel.CheckEnemyPosition(x,y)) {
+                        currentState = PositionState.Enemy;
                     }
                     else
                     {

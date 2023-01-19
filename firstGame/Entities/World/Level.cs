@@ -16,9 +16,11 @@ namespace firstgame.Entities
 
         protected Vector2? PlayerPosition;
 
-        private Player playerData;
+        private Player fullPlayerData;
 
         private Map worldMap;
+
+        private List<Enemy> levelEnemies = new List<Enemy>();
 
         public Position GetPosition(int x, int y)
         {
@@ -27,13 +29,43 @@ namespace firstgame.Entities
 
         public void SetPlayerData(Player player)
         {
-            Player playerData = player;
+            fullPlayerData = player;
             PlayerPosition = player.position.worldPosition;
         }
 
         public void GiveMap(Map map)
         {
             worldMap = map;
+        }
+
+        public void GenerateEnemies(List<Enemy> enemies)
+        {
+            foreach(Enemy enemy in enemies)
+            {
+                levelEnemies.Add(enemy);
+            }
+        }
+
+        public bool CheckEnemyPosition(int x, int y)
+        {
+            foreach(Enemy enemy in levelEnemies) {
+                int EnemyX = enemy.position.worldPosition.x;
+                int EnemyY = enemy.position.worldPosition.y;
+               if (EnemyX == x && EnemyY == y)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool EnemyInEnmpty(int x, int y)
+        {
+            if (worldMap.currentLevel.positions[x,y].State == World.PositionState.Empty)
+            {
+                return true;
+            }
+            return false;
         }
 
         
@@ -87,8 +119,9 @@ namespace firstgame.Entities
         public bool CheckCanMove(Vector2 position)
         {
             var state = positions[position.x, position.y].State;
-            if (state == World.PositionState.Enemy) {
-                playerData.EnemyContact();
+            if (worldMap.currentLevel.CheckEnemyPosition(position.x, position.y)) {
+                fullPlayerData.EnemyContact();
+                return false;
             } else if (state == World.PositionState.Empty || state == World.PositionState.Path)
             {
                 return true;
