@@ -16,35 +16,67 @@ namespace firstgame.Entities
 
         protected Vector2? PlayerPosition;
 
+        private Player playerData;
+
         public Position GetPosition(int x, int y)
         {
             return positions[y, x];
         }
 
-        public void SetplayerPosition(Player player)
+        public void SetPlayerData(Player player)
         {
+            Player playerData = player;
             PlayerPosition = player.position.worldPosition;
         }
 
-        public void Move(Direction direction)
+        public void MovePlayer(Direction direction)
         {
-            if (PlayerPosition is null) throw new Exception("Player Position was null");
+            Move(direction, PlayerPosition);
+        }
+
+        public void Move(Direction direction, Vector2 CharacterPosition)
+        {
+            if (CharacterPosition is null) throw new Exception("Player Position was null");
 
             switch (direction)
             {
                 case Direction.Left:
-                    PlayerPosition.x--;
+                    if (CheckCanMove(new Vector2(CharacterPosition.x - 1, CharacterPosition.y)))
+                    {
+                        CharacterPosition.x--;
+                    }
                     break;
                 case Direction.Right:
-                    PlayerPosition.x++;
+                    if (CheckCanMove(new Vector2(CharacterPosition.x + 1, CharacterPosition.y)))
+                    {
+                        CharacterPosition.x++;
+                    }
                     break;
                 case Direction.Up:
-                    PlayerPosition.y--;
+                    if (CheckCanMove(new Vector2(CharacterPosition.x, CharacterPosition.y - 1)))
+                    {
+                        CharacterPosition.y--;
+                    }
                     break;
                 case Direction.Down:
-                    PlayerPosition.y++;
+                    if (CheckCanMove(new Vector2(CharacterPosition.x, CharacterPosition.y + 1)))
+                    {
+                        CharacterPosition.y++;
+                    }
                     break;
             }
+        }
+
+        public bool CheckCanMove(Vector2 position)
+        {
+            var state = positions[position.x, position.y].State;
+            if (state == World.PositionState.Enemy) {
+                playerData.EnemyContact();
+            } else if (state == World.PositionState.Empty || state == World.PositionState.Path)
+            {
+                return true;
+            }
+            return false;
         }
 
         public Level(Vector2 size, Position[,] positions)

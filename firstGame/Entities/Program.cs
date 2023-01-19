@@ -40,17 +40,17 @@ namespace firstgame.Entities
                 var key = Console.ReadKey(true);
                 switch (key.Key) {
                     case ConsoleKey.UpArrow:
-                        map.currentLevel.Move(Direction.Up); break; 
+                        map.currentLevel.MovePlayer(Direction.Up); break; 
                     case ConsoleKey.DownArrow:
-                        map.currentLevel.Move(Direction.Down); break;
+                        map.currentLevel.MovePlayer(Direction.Down); break;
                     case ConsoleKey.LeftArrow:
-                        map.currentLevel.Move(Direction.Left); break;
+                        map.currentLevel.MovePlayer(Direction.Left); break;
                     case ConsoleKey.RightArrow:
-                        map.currentLevel.Move(Direction.Right); break;
+                        map.currentLevel.MovePlayer(Direction.Right); break;
 
                 }
 
-                Console.ReadKey();
+                Console.Clear();
 
 
             }

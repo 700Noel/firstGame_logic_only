@@ -14,6 +14,8 @@ namespace firstgame.Entities.Characters
 
         public int damage { get; private set; }
 
+        private int health;
+
         Range range = new Range();
 
         Position currentPosition;
@@ -35,6 +37,11 @@ namespace firstgame.Entities.Characters
             
 
             return damage; 
+        }
+
+        public void EnemyContact()
+        {
+            health = -5;
         }
 
         public Player(string name, int health, Position startPosition)
