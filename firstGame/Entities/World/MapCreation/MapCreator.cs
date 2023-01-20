@@ -14,6 +14,7 @@ namespace firstgame.Entities.World.MapCreation
             {
                new StartingLevel1().CreateLevel(),
                new Level2().CreateLevel(),
+               new Level3().CreateLevel(),
             });
 
         public Map GetMap() { 

@@ -10,13 +10,10 @@ namespace firstgame.Entities.Characters
     internal class Character    
     {
         public int health { get; private set; }
-
-        public int damage { get; private set; }
         public Position position { get; private set; }
 
-        public Character(int health, Position position) 
-        {
-            this.health = health;   
+        public Character(Position position) 
+        {  
             this.position = position;
         }
     }

@@ -56,8 +56,9 @@ namespace firstgame.Entities.Characters
         }
 
         public Player(string name, int health, Position startPosition)
-            :base(health, startPosition) 
+            :base(startPosition) 
         {
+            this.health = health;
             currentPosition = startPosition;
             this.name = name;
         }

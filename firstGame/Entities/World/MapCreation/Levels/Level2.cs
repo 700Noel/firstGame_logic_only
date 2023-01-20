@@ -16,7 +16,7 @@ namespace firstgame.Entities.World.MapCreation.Levels
 
 
         List<Enemy> enemies = new List<Enemy>();
-        Enemy enemy1 = new Enemy(1, 20, new Position(new Vector2(8, 1), 2), 5);
+        Enemy enemy1 = new Enemy(1, new Position(new Vector2(8, 1), 2));
 
         public Level CreateLevel()
         {
