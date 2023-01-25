@@ -20,7 +20,7 @@ namespace firstgame.Entities.Characters
 
         public int damage { get; private set; }
 
-        private int health;
+        public int health { get; private set; }
 
         Range range = new Range();
 
@@ -38,26 +38,42 @@ namespace firstgame.Entities.Characters
             level = currentLevel;
         }
 
-        public int Attack(Enemy enemy)
+        public int Attack(Level level)
         {
-            if(range.InRange(position, enemy.position, weapon)) {
+            /*if(range.InRange(position, enemy.position, weapon)) {
                 if (weapon == Weapon.Sword) { damage = 10; }
                 else if (weapon == Weapon.Axe) { damage = 20; }
             }
                 else if( weapon == Weapon.Speer ) { damage = 10; } 
             
+            */
+            return ReturnDamage(); 
+        }
 
-            return damage; 
+        private int ReturnDamage() 
+        {
+            switch (weapon)
+            {
+                case Weapon.Sword:
+                    return 10;
+                case Weapon.Speer:
+                    return 10;
+                case Weapon.Axe:
+                    return 20;
+                default:
+                    return 0;
+            }
         }
 
         public void EnemyContact()
         {
-            health = -5;
+            health -= 5;
         }
 
-        public Player(string name, int health, Position startPosition)
-            :base(startPosition) 
+        public Player(string name, int health, Position startPosition, int damage)
+            :base(startPosition, damage) 
         {
+            this.damage = ReturnDamage();
             this.health = health;
             currentPosition = startPosition;
             this.name = name;

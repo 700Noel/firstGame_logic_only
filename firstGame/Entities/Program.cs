@@ -20,10 +20,10 @@ namespace firstgame.Entities
             string name = Console.ReadLine();
 
 
+
             
 
-            Player player = new Player(name, 100, new Position(new Vector2(3,3), 1));
-
+            Player player = new Player(name, 100, new Position(new Vector2(3,3), 1), 0);
 
             //map.currentLevel.positions[1, 0].State = PositionStateExtension.GetFromNumber(3);
 
@@ -49,9 +49,9 @@ namespace firstgame.Entities
                         map.currentLevel.MovePlayer(Direction.Left); break;
                     case ConsoleKey.RightArrow:
                         map.currentLevel.MovePlayer(Direction.Right); break;
-                    /*case ConsoleKey.Spacebar:
-                        player.Attack();
-                        break;*/
+                    case ConsoleKey.Spacebar:
+                        player.Attack(map.currentLevel);
+                        break;
 
                 }
 

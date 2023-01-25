@@ -14,8 +14,8 @@ namespace firstgame.Entities.World.MapCreation.Levels
         Entrance entrance = new Entrance();
 
         List<Enemy> enemies = new List<Enemy>();
-        Enemy enemy1 = new Enemy(1, new Position(new Vector2(8,2), 2));
-        Enemy enemy2 = new Enemy(1, new Position(new Vector2(8, 2), 2));
+        Enemy enemy1 = new Enemy(1, new Position(new Vector2(8,2), 2), 0);
+        Enemy enemy2 = new Enemy(1, new Position(new Vector2(8, 2), 2), 0);
 
         public Level CreateLevel()
         {

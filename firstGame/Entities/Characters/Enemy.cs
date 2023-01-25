@@ -16,8 +16,8 @@ namespace firstgame.Entities.Characters
         public int health { get; private set; }
 
         public byte id { get; private set; }
-        public Enemy(byte id, Position position)
-            : base(position)
+        public Enemy(byte id, Position position, int damage)
+            : base(position, damage)
         {
             CreateEnemy create = new CreateEnemy(id);
             this.race = create.GetRace();

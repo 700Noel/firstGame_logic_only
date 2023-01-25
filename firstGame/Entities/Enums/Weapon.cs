@@ -8,6 +8,7 @@ namespace firstgame.Entities.Enums
 {
     internal enum Weapon
     {
+        none,
         Sword,
         Speer,
         Axe,

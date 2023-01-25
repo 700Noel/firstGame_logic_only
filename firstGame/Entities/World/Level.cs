@@ -18,6 +18,8 @@ namespace firstgame.Entities
 
         private Player fullPlayerData;
 
+        Direction playerDirection;
+
         private Map worldMap;
 
         private List<Enemy> levelEnemies = new List<Enemy>();
@@ -30,6 +32,7 @@ namespace firstgame.Entities
         public void SetPlayerData(Player player)
         {
             fullPlayerData = player;
+            playerDirection = player.direction;
             PlayerPosition = player.position.worldPosition;
         }
 
@@ -38,11 +41,13 @@ namespace firstgame.Entities
             worldMap = map;
         }
 
-        public void GenerateEnemies(List<Enemy> enemies)
+        public void GenerateEnemies(List<Enemy> enemies, Level level)
         {
             foreach(Enemy enemy in enemies)
             {
-                levelEnemies.Add(enemy);
+                if (EnemyInEmpty(enemy.enemyPosition.worldPosition.x, enemy.enemyPosition.worldPosition.y, level)) {
+                    levelEnemies.Add(enemy);
+                }
             }
         }
 
@@ -51,7 +56,7 @@ namespace firstgame.Entities
             foreach(Enemy enemy in levelEnemies) {
                 int EnemyX = enemy.position.worldPosition.x;
                 int EnemyY = enemy.position.worldPosition.y;
-               if (EnemyX == x && EnemyY == y)
+               if (EnemyX == x && EnemyY == y )
                 {
                     return true;
                 }
@@ -59,13 +64,18 @@ namespace firstgame.Entities
             return false;
         }
 
-        public bool EnemyInEnmpty(int x, int y)
+        public bool EnemyInEmpty(int x, int y, Level level)
         {
-            if (worldMap.currentLevel.positions[x,y].State == World.PositionState.Empty)
+            if (level.positions[x,y].State == World.PositionState.Empty)
             {
                 return true;
             }
             return false;
+        }
+
+        public List<Enemy> Enemies()
+        {
+            return levelEnemies;
         }
 
         
@@ -76,6 +86,7 @@ namespace firstgame.Entities
             switch (direction)
             {
                 case Direction.Left:
+                    playerDirection = direction;
                     if (PlayerPosition.x - 1 < 0)
                     {
                         PlayerPosition.x = size.x - 1;
