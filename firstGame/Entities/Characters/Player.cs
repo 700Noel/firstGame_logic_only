@@ -28,6 +28,11 @@ namespace firstgame.Entities.Characters
 
 
 
+        public void TestWeapon()
+        {
+            weapon = Weapon.Sword;
+        }
+
         public void SetDirection(Direction direction)
         {
             this.direction = direction;
@@ -43,16 +48,16 @@ namespace firstgame.Entities.Characters
             level = currentLevel;
         }
 
-        public int Attack(Level level)
+        public void Attack(Level level)
         {
-            /*if(range.InRange(position, enemy.position, weapon)) {
-                if (weapon == Weapon.Sword) { damage = 10; }
-                else if (weapon == Weapon.Axe) { damage = 20; }
+            foreach (Enemy enemy in level.Enemies())
+            {
+                if (range.InRange(currentPosition, enemy.enemyPosition, weapon))
+                {
+                    enemy.DamageEnemy(ReturnDamage());
+                }
             }
-                else if( weapon == Weapon.Speer ) { damage = 10; } 
             
-            */
-            return ReturnDamage(); 
         }
 
         private int ReturnDamage() 

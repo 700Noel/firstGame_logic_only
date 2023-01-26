@@ -52,7 +52,9 @@ namespace firstgame.Entities
                     case ConsoleKey.Spacebar:
                         player.Attack(map.currentLevel);
                         break;
-
+                    case ConsoleKey.C:
+                        player.TestWeapon();
+                        break;
                 }
 
                 

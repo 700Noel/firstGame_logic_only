@@ -16,6 +16,11 @@ namespace firstgame.Entities.Characters
         public int health { get; private set; }
 
         public byte id { get; private set; }
+
+        public void DamageEnemy(int newHealth)
+        {
+            this.health -= newHealth;
+        }
         public Enemy(byte id, Position position, int damage)
             : base(position, damage)
         {
