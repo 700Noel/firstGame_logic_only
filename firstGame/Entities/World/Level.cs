@@ -18,7 +18,7 @@ namespace firstgame.Entities
 
         private Player fullPlayerData;
 
-        Direction playerDirection;
+        private Direction playerDirection;
 
         private Map worldMap;
 
@@ -79,6 +79,8 @@ namespace firstgame.Entities
         }
 
         
+
+        
         public void MovePlayer(Direction direction)
         {
             if (PlayerPosition is null) throw new Exception("Player Position was null");
@@ -86,7 +88,7 @@ namespace firstgame.Entities
             switch (direction)
             {
                 case Direction.Left:
-                    playerDirection = direction;
+                    fullPlayerData.SetDirection(direction);
                     if (PlayerPosition.x - 1 < 0)
                     {
                         PlayerPosition.x = size.x - 1;
@@ -96,6 +98,7 @@ namespace firstgame.Entities
                     break;
 
                 case Direction.Right:
+                    fullPlayerData.SetDirection(direction);
                     if (PlayerPosition.x + 1 >= size.x)
                     {
                         PlayerPosition.x = 0;
@@ -105,6 +108,7 @@ namespace firstgame.Entities
                     break;
 
                 case Direction.Up:
+                    fullPlayerData.SetDirection(direction);
                     if (PlayerPosition.y - 1 < 0)
                     {
                         PlayerPosition.y = size.y - 1;
@@ -114,6 +118,7 @@ namespace firstgame.Entities
                     break;
 
                 case Direction.Down:
+                    fullPlayerData.SetDirection(direction);
                     if (PlayerPosition.y + 1 >= size.y)
                     {
                         PlayerPosition.y = 0;

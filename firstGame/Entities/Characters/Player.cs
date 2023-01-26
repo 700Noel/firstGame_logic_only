@@ -28,12 +28,17 @@ namespace firstgame.Entities.Characters
 
 
 
+        public void SetDirection(Direction direction)
+        {
+            this.direction = direction;
+        }
+
         public void SetWeapon(Weapon currentWeapon)
         {
             this.weapon = currentWeapon;
         }
 
-        public void getLevel(Level currentLevel)
+        public void setLevel(Level currentLevel)
         {
             level = currentLevel;
         }
