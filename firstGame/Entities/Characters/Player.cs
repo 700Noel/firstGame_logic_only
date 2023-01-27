@@ -18,6 +18,10 @@ namespace firstgame.Entities.Characters
 
         Level level;
 
+        Enemy deleteEnemy;
+
+        bool killEnemy = false;
+
         public int damage { get; private set; }
 
         public int health { get; private set; }
@@ -55,9 +59,18 @@ namespace firstgame.Entities.Characters
                 if (range.InRange(currentPosition, enemy.enemyPosition, weapon, direction))
                 {
                     enemy.DamageEnemy(ReturnDamage());
+                    if(enemy.health <= 0)
+                    {
+                        deleteEnemy = enemy;
+                        killEnemy = true;
+                    }
                 }
             }
-            
+            if (killEnemy)
+            {
+                level.Enemies().Remove(deleteEnemy);
+            }
+
         }
 
         private int ReturnDamage() 
