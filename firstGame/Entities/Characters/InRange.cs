@@ -12,7 +12,7 @@ namespace firstgame.Entities.Characters
     {
         int range;
 
-        public bool InRange(Position playerPosition, Position enemyPosition, Weapon weapon) 
+        public bool InRange(Position playerPosition, Position enemyPosition, Weapon weapon, Direction direction) 
         {
             int playerX = playerPosition.worldPosition.x;
             int playerY = playerPosition.worldPosition.y;
@@ -29,19 +29,30 @@ namespace firstgame.Entities.Characters
             {
                 range = 1;
             }
-            if(PlayerToEnemyRange(playerX, EnemyX, range) && PlayerToEnemyRange(playerY, EnemyY, 0) || PlayerToEnemyRange(playerY, EnemyY, range) && PlayerToEnemyRange(playerX, EnemyX, 0)) {
+            if(PlayerToEnemyRange(playerX, EnemyX, range, direction) && PlayerToEnemyRange(playerY, EnemyY, 0, direction) || 
+                PlayerToEnemyRange(playerY, EnemyY, range, direction) && PlayerToEnemyRange(playerX, EnemyX, 0, direction)) {
                 return true;
             }
             return false;
         }
 
-        private bool PlayerToEnemyRange(int playerVector, int enemyVector, int checkNumber)
+        private bool PlayerToEnemyRange(int playerVector, int enemyVector, int checkNumber, Direction direction)
         {
-            if(Math.Abs(playerVector - enemyVector) <= checkNumber)
+            if (direction == Direction.Up || direction == Direction.Left)
             {
-                return true;
+                if (playerVector - enemyVector <= checkNumber && playerVector - enemyVector >= 0)
+                {
+                    return true;
+                }
+                return false;
+            } else
+            {
+                if (playerVector - enemyVector >= -checkNumber && playerVector - enemyVector <= 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
     }

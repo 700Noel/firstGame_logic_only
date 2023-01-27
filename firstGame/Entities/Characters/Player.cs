@@ -30,7 +30,7 @@ namespace firstgame.Entities.Characters
 
         public void TestWeapon()
         {
-            weapon = Weapon.Sword;
+            weapon = Weapon.Axe;
         }
 
         public void SetDirection(Direction direction)
@@ -52,7 +52,7 @@ namespace firstgame.Entities.Characters
         {
             foreach (Enemy enemy in level.Enemies())
             {
-                if (range.InRange(currentPosition, enemy.enemyPosition, weapon))
+                if (range.InRange(currentPosition, enemy.enemyPosition, weapon, direction))
                 {
                     enemy.DamageEnemy(ReturnDamage());
                 }
