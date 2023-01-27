@@ -18,8 +18,6 @@ namespace firstgame.Entities.World.MapCreation.Levels
         List<Enemy> enemies = new List<Enemy>();
         Enemy enemy1 = new Enemy(1, new Position(new Vector2(8, 1), 2), 0);
         Enemy enemy2 = new Enemy(1, new Position(new Vector2(8, 2), 2), 0);
-        Enemy enemy3 = new Enemy(1, new Position(new Vector2(8, 5), 2), 0);
-        Enemy enemy4 = new Enemy(1, new Position(new Vector2(8, 6), 2), 0);
 
         public Level CreateLevel()
         {
@@ -31,11 +29,13 @@ namespace firstgame.Entities.World.MapCreation.Levels
             level.positions[5, 4].State = PositionState.Obstacle;
             level.positions[6, 3].State = PositionState.Obstacle;
             level.positions[6, 4].State = PositionState.Obstacle;
+            level.positions[5, 5].State = PositionState.Obstacle;
+            level.positions[5, 6].State = PositionState.Obstacle;
+            level.positions[6, 5].State = PositionState.Obstacle;
+            level.positions[6, 6].State = PositionState.Obstacle;
 
             enemies.Add(enemy1);
             enemies.Add(enemy2);
-            enemies.Add(enemy3);
-            enemies.Add(enemy4);
 
             level.GenerateEnemies(enemies, level);
 
