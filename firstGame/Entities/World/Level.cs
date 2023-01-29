@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using firstgame.Entities.Enums;
 using firstgame.Entities.World;
 using firstgame.Entities.Characters;
+using firstgame.Entities.Characters.PlayerMechanics;
 
 namespace firstgame.Entities
 {
@@ -21,6 +22,8 @@ namespace firstgame.Entities
         private Direction playerDirection;
 
         private Map worldMap;
+
+        PlayerMove playerMove = new PlayerMove();
 
         private List<Enemy> levelEnemies = new List<Enemy>();
 
@@ -78,72 +81,14 @@ namespace firstgame.Entities
             return levelEnemies;
         }
 
-        
-
-        
-        public void MovePlayer(Direction direction)
+        public void Move(Direction direction)
         {
-            if (PlayerPosition is null) throw new Exception("Player Position was null");
-
-            switch (direction)
-            {
-                case Direction.Left:
-                    fullPlayerData.SetDirection(direction);
-                    if (PlayerPosition.x - 1 < 0)
-                    {
-                        PlayerPosition.x = size.x - 1;
-                        worldMap.setCurrentLevel(-1);
-                    } else if (CheckCanMove(new Vector2(PlayerPosition.x - 1, PlayerPosition.y)))
-                    { PlayerPosition.x--; }
-                    break;
-
-                case Direction.Right:
-                    fullPlayerData.SetDirection(direction);
-                    if (PlayerPosition.x + 1 >= size.x)
-                    {
-                        PlayerPosition.x = 0;
-                        worldMap.setCurrentLevel(1);
-                    } else if (CheckCanMove(new Vector2(PlayerPosition.x + 1, PlayerPosition.y)))
-                    { PlayerPosition.x++; }
-                    break;
-
-                case Direction.Up:
-                    fullPlayerData.SetDirection(direction);
-                    if (PlayerPosition.y - 1 < 0)
-                    {
-                        PlayerPosition.y = size.y - 1;
-                        worldMap.setCurrentLevel(-3);
-                    } else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y - 1)))
-                    { PlayerPosition.y--; }
-                    break;
-
-                case Direction.Down:
-                    fullPlayerData.SetDirection(direction);
-                    if (PlayerPosition.y + 1 >= size.y)
-                    {
-                        PlayerPosition.y = 0;
-                        worldMap.setCurrentLevel(3);
-
-                    } else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y + 1)))
-                    { PlayerPosition.y++; }
-                    break;
-            }
+            playerMove.getNecasseryData(fullPlayerData, PlayerPosition, size, worldMap, positions);
+            playerMove.MovePlayer(direction);
         }
 
-
-
-        public bool CheckCanMove(Vector2 position)
-        {
-            var state = positions[position.x, position.y].State;
-            if (worldMap.currentLevel.CheckEnemyPosition(position.x, position.y)) {
-                fullPlayerData.EnemyContact();
-                return false;
-            } else if (state == World.PositionState.Empty || state == World.PositionState.Path)
-            {
-                return true;
-            }
-            return false;
-        }
+        
+        
 
         public Level(Vector2 size, Position[,] positions)
         {

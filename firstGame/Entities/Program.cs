@@ -15,24 +15,10 @@ namespace firstgame.Entities
             Display display = new Display();
             Map map = new MapCreator().GetMap();
 
-
-
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
 
-
-
-            
-
             Player player = new Player(name, 100, new Position(new Vector2(3,3), 1), 0);
-
-            //map.currentLevel.positions[1, 0].State = PositionStateExtension.GetFromNumber(3);
-
-            /*display.Draw(map, player.position);
-            Console.WriteLine();
-            map.setCurrentLevel();
-            display.Draw(map, player.position);
-            Console.WriteLine();*/
 
             while (true)
             {
@@ -43,22 +29,18 @@ namespace firstgame.Entities
                 var key = Console.ReadKey(true);
                 switch (key.Key) {
                     case ConsoleKey.UpArrow:
-                        map.currentLevel.MovePlayer(Direction.Up); break; 
+                        map.currentLevel.Move(Direction.Up); break; 
                     case ConsoleKey.DownArrow:
-                        map.currentLevel.MovePlayer(Direction.Down); break;
+                        map.currentLevel.Move(Direction.Down); break;
                     case ConsoleKey.LeftArrow:
-                        map.currentLevel.MovePlayer(Direction.Left); break;
+                        map.currentLevel.Move(Direction.Left); break;
                     case ConsoleKey.RightArrow:
-                        map.currentLevel.MovePlayer(Direction.Right); break;
+                        map.currentLevel.Move(Direction.Right); break;
                     case ConsoleKey.Spacebar:
                         player.Combat(map.currentLevel); break;
                     case ConsoleKey.C:
                         player.TestWeapon(); break;
                 }
-
-                
-
-
             }
         }
     }
