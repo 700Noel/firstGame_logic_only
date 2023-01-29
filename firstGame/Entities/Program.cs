@@ -40,6 +40,10 @@ namespace firstgame.Entities
                         player.Combat(map.currentLevel); break;
                     case ConsoleKey.C:
                         player.TestWeapon(); break;
+
+                        //Step 1. Picking up a Weapon
+                        //Step 2. Change direction, without moving or agroing enemy
+                        //Step 3. enemy movement
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using firstgame.Entities.Characters;
 using firstgame.Entities.World;
 using firstgame.Extensions;
+using firstgame.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
 ﻿using firstgame.Extensions;
+using firstgame.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,5 @@ namespace firstgame.Entities.World
         }
     }
 
-    public enum PositionState
-    {
-        Empty,
-        Player,
-        Enemy,
-        Obstacle,
-        Path
 
-    }
 }

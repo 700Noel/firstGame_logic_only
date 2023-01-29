@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace firstgame.Entities.Enums
 {
-    internal class PositionState
+    public enum PositionState
     {
+        Empty,
+        Player,
+        Enemy,
+        Obstacle,
+        Path
+
     }
 }

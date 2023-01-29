@@ -69,7 +69,7 @@ namespace firstgame.Entities
 
         public bool EnemyInEmpty(int x, int y, Level level)
         {
-            if (level.positions[x,y].State == World.PositionState.Empty)
+            if (level.positions[x,y].State == PositionState.Empty)
             {
                 return true;
             }

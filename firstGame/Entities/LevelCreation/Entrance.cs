@@ -14,30 +14,30 @@ namespace firstgame.Entities.LevelCreation
             if(direction == Direction.Up)
             {
                 for (int i = 0; i < 5; i++) {
-                    level.positions[5, i].State = World.PositionState.Path;
-                    level.positions[6, i].State = World.PositionState.Path;
+                    level.positions[5, i].State = PositionState.Path;
+                    level.positions[6, i].State = PositionState.Path;
                 }
             }
             if (direction == Direction.Down)
             {
                 for (int i = 3; i <= 7; i++)
                 {
-                    level.positions[5, i].State = World.PositionState.Path;
-                    level.positions[6, i].State = World.PositionState.Path;
+                    level.positions[5, i].State = PositionState.Path;
+                    level.positions[6, i].State = PositionState.Path;
                 }
             }
             if (direction == Direction.Left)
             {
                 for (int i = 0; i <= 6; i++) {
-                    level.positions[i, 3].State = World.PositionState.Path;
-                    level.positions[i, 4].State = World.PositionState.Path;
+                    level.positions[i, 3].State = PositionState.Path;
+                    level.positions[i, 4].State = PositionState.Path;
                 }
             }
             if (direction == Direction.Right)
             {
                 for (int i = 5; i <= 11; i++) {
-                    level.positions[i, 3].State = World.PositionState.Path;
-                    level.positions[i, 4].State = World.PositionState.Path;
+                    level.positions[i, 3].State = PositionState.Path;
+                    level.positions[i, 4].State = PositionState.Path;
                 }
             }
         }

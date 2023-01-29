@@ -95,7 +95,7 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                 fullPlayerData.EnemyContact();
                 return false;
             }
-            else if (state == World.PositionState.Empty || state == World.PositionState.Path)
+            else if (state == PositionState.Empty || state == PositionState.Path)
             {
                 return true;
             }

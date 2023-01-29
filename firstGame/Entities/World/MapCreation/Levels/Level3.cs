@@ -1,5 +1,6 @@
 ﻿using firstgame.Entities.Characters;
 using firstgame.Entities.LevelCreation;
+using firstgame.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
