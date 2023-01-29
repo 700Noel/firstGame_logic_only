@@ -1,10 +1,12 @@
-﻿using firstgame.Entities.Enums;
+﻿using firstgame.Entities.Characters.PlayerMechanics;
+using firstgame.Entities.Enums;
 using firstgame.Entities.World;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Range = firstgame.Entities.Characters.PlayerMechanics.Range;
 
 namespace firstgame.Entities.Characters
 {
@@ -18,19 +20,15 @@ namespace firstgame.Entities.Characters
 
         Level level;
 
-        Enemy deleteEnemy;
-
-        bool killEnemy = false;
+        PlayerCombat playerCombat = new PlayerCombat();
 
         public int damage { get; private set; }
 
         public int health { get; private set; }
 
-        Range range = new Range();
-
         Position currentPosition;
 
-
+        
 
         public void TestWeapon()
         {
@@ -47,46 +45,13 @@ namespace firstgame.Entities.Characters
             this.weapon = currentWeapon;
         }
 
-        public void setLevel(Level currentLevel)
+        public void Combat(Level level)
         {
-            level = currentLevel;
+            playerCombat.getPlayer(this);
+            playerCombat.Attack(level);
         }
 
-        public void Attack(Level level)
-        {
-            foreach (Enemy enemy in level.Enemies())
-            {
-                if (range.InRange(currentPosition, enemy.enemyPosition, weapon, direction))
-                {
-                    enemy.DamageEnemy(ReturnDamage());
-                    if(enemy.health <= 0)
-                    {
-                        deleteEnemy = enemy;
-                        killEnemy = true;
-                    }
-                }
-            }
-            if (killEnemy)
-            {
-                level.Enemies().Remove(deleteEnemy);
-            }
 
-        }
-
-        private int ReturnDamage() 
-        {
-            switch (weapon)
-            {
-                case Weapon.Sword:
-                    return 10;
-                case Weapon.Speer:
-                    return 10;
-                case Weapon.Axe:
-                    return 20;
-                default:
-                    return 0;
-            }
-        }
 
         public void EnemyContact()
         {
@@ -96,7 +61,7 @@ namespace firstgame.Entities.Characters
         public Player(string name, int health, Position startPosition, int damage)
             :base(startPosition, damage) 
         {
-            this.damage = ReturnDamage();
+            this.damage = playerCombat.ReturnDamage();
             this.health = health;
             currentPosition = startPosition;
             this.name = name;

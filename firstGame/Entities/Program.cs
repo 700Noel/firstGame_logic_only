@@ -51,11 +51,9 @@ namespace firstgame.Entities
                     case ConsoleKey.RightArrow:
                         map.currentLevel.MovePlayer(Direction.Right); break;
                     case ConsoleKey.Spacebar:
-                        player.Attack(map.currentLevel);
-                        break;
+                        player.Combat(map.currentLevel); break;
                     case ConsoleKey.C:
-                        player.TestWeapon();
-                        break;
+                        player.TestWeapon(); break;
                 }
 
                 

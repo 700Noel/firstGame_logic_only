@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace firstgame.Entities.Characters
+namespace firstgame.Entities.Characters.PlayerMechanics
 {
     internal class Range
     {
         int range;
 
-        public bool InRange(Position playerPosition, Position enemyPosition, Weapon weapon, Direction direction) 
+        public bool InRange(Position playerPosition, Position enemyPosition, Weapon weapon, Direction direction)
         {
             int playerX = playerPosition.worldPosition.x;
             int playerY = playerPosition.worldPosition.y;
@@ -22,15 +22,18 @@ namespace firstgame.Entities.Characters
             if (weapon == Weapon.Speer)
             {
                 range = 2;
-            } else if (weapon == Weapon.none) 
+            }
+            else if (weapon == Weapon.none)
             {
                 range = 0;
-            } else
+            }
+            else
             {
                 range = 1;
             }
-            if(PlayerToEnemyRange(playerX, EnemyX, range, direction) && PlayerToEnemyRange(playerY, EnemyY, 0, direction) || 
-                PlayerToEnemyRange(playerY, EnemyY, range, direction) && PlayerToEnemyRange(playerX, EnemyX, 0, direction)) {
+            if (PlayerToEnemyRange(playerX, EnemyX, range, direction) && PlayerToEnemyRange(playerY, EnemyY, 0, direction) ||
+                PlayerToEnemyRange(playerY, EnemyY, range, direction) && PlayerToEnemyRange(playerX, EnemyX, 0, direction))
+            {
                 return true;
             }
             return false;
@@ -45,7 +48,8 @@ namespace firstgame.Entities.Characters
                     return true;
                 }
                 return false;
-            } else
+            }
+            else
             {
                 if (playerVector - enemyVector >= -checkNumber && playerVector - enemyVector <= 0)
                 {
