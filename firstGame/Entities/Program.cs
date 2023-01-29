@@ -41,9 +41,11 @@ namespace firstgame.Entities
                     case ConsoleKey.C:
                         player.TestWeapon(); break;
 
-                        //Step 1. Picking up a Weapon
-                        //Step 2. Change direction, without moving or agroing enemy
-                        //Step 3. enemy movement
+                        //Step 1. Update LevelCreation
+                        //Step 2. Picking up a Weapon
+                        //Step 3. Change direction, without moving or agroing enemy
+                        //Step 4. Enemy spawn each time, when Enemy enters
+                        //Step 5. enemy movement
                 }
             }
         }

@@ -19,6 +19,7 @@ namespace firstgame.Extensions
                 PositionState.Enemy => "X ",
                 PositionState.Obstacle => "T ",
                 PositionState.Path => "_ ",
+                PositionState.Item => "W ",
                 _ => ""
             };
         }
@@ -31,6 +32,7 @@ namespace firstgame.Extensions
                 2 => PositionState.Enemy,
                 3 => PositionState.Obstacle,
                 4 => PositionState.Path,
+                5 => PositionState.Item,
                 _ => throw new NotImplementedException()
             };
         }

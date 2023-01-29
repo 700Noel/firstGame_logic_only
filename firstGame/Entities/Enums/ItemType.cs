@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace firstgame.Entities.Enums
 {
-    public enum PositionState
+    internal enum ItemType
     {
-        Empty,
-        Player,
-        Enemy,
-        Obstacle,
-        Path,
-        Item
-
+        Weapon,
+        Heal,
+        none
     }
 }

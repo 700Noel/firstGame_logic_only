@@ -10,13 +10,13 @@ namespace firstgame.Entities.World
 {
     public class Position
     {
-        public Vector2 worldPosition { get; set; }
+        public Vector2 vector2 { get; set; }
 
         public PositionState State { get; set; }
 
         public Position(Vector2 worldPosition, int state)
         {
-            this.worldPosition = worldPosition;
+            this.vector2 = worldPosition;
             State = PositionStateExtension.GetFromNumber(state);
         }
     }

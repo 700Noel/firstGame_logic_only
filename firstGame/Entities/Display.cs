@@ -20,7 +20,7 @@ namespace firstgame.Entities
         {
             Console.Clear();
             map.currentLevel.SetPlayerData(player);
-            map.currentLevel.GiveMap(map);
+            map.currentLevel.SetMap(map);
 
 
 
@@ -33,6 +33,9 @@ namespace firstgame.Entities
                         currentState = PositionState.Player;
                     } else if(map.currentLevel.CheckEnemyPosition(x,y)) {
                         currentState = PositionState.Enemy;
+                    } else if(map.currentLevel.CheckItemPosition(x,y))
+                    {
+                        currentState = PositionState.Item;
                     }
                     else
                     {

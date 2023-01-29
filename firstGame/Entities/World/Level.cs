@@ -7,6 +7,7 @@ using firstgame.Entities.Enums;
 using firstgame.Entities.World;
 using firstgame.Entities.Characters;
 using firstgame.Entities.Characters.PlayerMechanics;
+using firstgame.Entities.World.WorldInteraction;
 
 namespace firstgame.Entities
 {
@@ -19,13 +20,13 @@ namespace firstgame.Entities
 
         private Player fullPlayerData;
 
-        private Direction playerDirection;
-
         private Map worldMap;
 
         PlayerMove playerMove = new PlayerMove();
 
         private List<Enemy> levelEnemies = new List<Enemy>();
+
+        private List<WeaponItem> weaponItems = new List<WeaponItem>();
 
         public Position GetPosition(int x, int y)
         {
@@ -35,11 +36,10 @@ namespace firstgame.Entities
         public void SetPlayerData(Player player)
         {
             fullPlayerData = player;
-            playerDirection = player.direction;
-            PlayerPosition = player.position.worldPosition;
+            PlayerPosition = player.position.vector2;
         }
 
-        public void GiveMap(Map map)
+        public void SetMap(Map map)
         {
             worldMap = map;
         }
@@ -48,18 +48,41 @@ namespace firstgame.Entities
         {
             foreach(Enemy enemy in enemies)
             {
-                if (EnemyInEmpty(enemy.enemyPosition.worldPosition.x, enemy.enemyPosition.worldPosition.y, level)) {
+                if (EnemyInEmpty(enemy.enemyPosition.vector2.x, enemy.enemyPosition.vector2.y, level)) {
                     levelEnemies.Add(enemy);
                 }
             }
         }
 
+        public void GenerateItems(List<WeaponItem> weapons)
+        {
+            foreach (WeaponItem weaponItem in weapons)
+            {
+                weaponItems.Add(weaponItem);
+            }
+        }
+
         public bool CheckEnemyPosition(int x, int y)
         {
-            foreach(Enemy enemy in levelEnemies) {
-                int EnemyX = enemy.position.worldPosition.x;
-                int EnemyY = enemy.position.worldPosition.y;
-               if (EnemyX == x && EnemyY == y )
+            foreach(Enemy enemy in levelEnemies) 
+            {
+                int EnemyX = enemy.position.vector2.x;
+                int EnemyY = enemy.position.vector2.y;
+                if (EnemyX == x && EnemyY == y )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CheckItemPosition(int x, int y)
+        {
+            foreach(WeaponItem weaponItem in weaponItems)
+            {
+                int weaponItemX = weaponItem.position.vector2.x;
+                int weaponItemY = weaponItem.position.vector2.y;
+                if(weaponItemX == x && weaponItemY == y )
                 {
                     return true;
                 }
@@ -81,9 +104,14 @@ namespace firstgame.Entities
             return levelEnemies;
         }
 
+        public List<WeaponItem> WeaponItems()
+        {
+            return weaponItems;
+        }
+
         public void Move(Direction direction)
         {
-            playerMove.getNecasseryData(fullPlayerData, PlayerPosition, size, worldMap, positions);
+            playerMove.getNecasseryData(fullPlayerData, PlayerPosition, size, worldMap, positions, weaponItems);
             playerMove.MovePlayer(direction);
         }
 

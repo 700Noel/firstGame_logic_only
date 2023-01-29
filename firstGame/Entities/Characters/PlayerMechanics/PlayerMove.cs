@@ -1,5 +1,6 @@
 ﻿using firstgame.Entities.Enums;
 using firstgame.Entities.World;
+using firstgame.Entities.World.WorldInteraction;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -23,13 +24,23 @@ namespace firstgame.Entities.Characters.PlayerMechanics
 
         public Vector2 size { get; private set; }
 
-        public void getNecasseryData(Player player, Vector2 playerPosition, Vector2 size, Map map, Position[,] positions)
+        private Weapon newWeapon;
+
+        private WeaponItem weaponItem;
+
+        private Weapon playerWeapon;
+
+        private List<WeaponItem> weapons;
+
+        public void getNecasseryData(Player player, Vector2 playerPosition, Vector2 size, Map map, Position[,] positions, List<WeaponItem> weaponItems)
         {
             fullPlayerData = player;
             this.size = size;
             worldMap = map;
             this.positions = positions;
             this.PlayerPosition = playerPosition;
+            this.playerWeapon = player.weapon;
+            weapons = weaponItems;
         }
 
         public void MovePlayer(Direction direction)
@@ -46,7 +57,14 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                         worldMap.setCurrentLevel(-1);
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x - 1, PlayerPosition.y)))
-                    { PlayerPosition.x--; }
+                    { 
+                        PlayerPosition.x--;
+                        if (CheckItemPosition(weapons, PlayerPosition))
+                        {
+                            fullPlayerData.SetWeapon(newWeapon);
+                            weaponItem.DestroyItem(worldMap.currentLevel);
+                        }
+                    }
                     break;
 
                 case Direction.Right:
@@ -57,7 +75,14 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                         worldMap.setCurrentLevel(1);
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x + 1, PlayerPosition.y)))
-                    { PlayerPosition.x++; }
+                    { 
+                        PlayerPosition.x++;
+                        if (CheckItemPosition(weapons, PlayerPosition))
+                        {
+                            fullPlayerData.SetWeapon(newWeapon);
+                            weaponItem.DestroyItem(worldMap.currentLevel);
+                        }
+                    }
                     break;
 
                 case Direction.Up:
@@ -68,7 +93,14 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                         worldMap.setCurrentLevel(-3);
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y - 1)))
-                    { PlayerPosition.y--; }
+                    { 
+                        PlayerPosition.y--;
+                        if (CheckItemPosition(weapons, PlayerPosition))
+                        {
+                            fullPlayerData.SetWeapon(newWeapon);
+                            weaponItem.DestroyItem(worldMap.currentLevel);
+                        }
+                    }
                     break;
 
                 case Direction.Down:
@@ -77,17 +109,37 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     {
                         PlayerPosition.y = 0;
                         worldMap.setCurrentLevel(3);
-
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y + 1)))
-                    { PlayerPosition.y++; }
+                    { 
+                        PlayerPosition.y++;
+                        if (CheckItemPosition(weapons, PlayerPosition))
+                        {
+                            fullPlayerData.SetWeapon(newWeapon);
+                            weaponItem.DestroyItem(worldMap.currentLevel);
+                        }
+                    }
                     break;
             }
         }
 
+        private bool CheckItemPosition(List<WeaponItem> weaponItems, Vector2 playerPosition)
+        {
+            foreach(WeaponItem weaponItem in weaponItems)
+            {
+                if(weaponItem.position.vector2.x == playerPosition.x && weaponItem.position.vector2.y == playerPosition.y)
+                {
+                    newWeapon = weaponItem.weapon;
+                    this.weaponItem = weaponItem; 
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
-        public bool CheckCanMove(Vector2 position)
+
+        private bool CheckCanMove(Vector2 position)
         {
             var state = positions[position.x, position.y].State;
             if (worldMap.currentLevel.CheckEnemyPosition(position.x, position.y))

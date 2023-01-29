@@ -18,8 +18,6 @@ namespace firstgame.Entities.Characters
 
         public string name { get; private set; }
 
-        Level level;
-
         PlayerCombat playerCombat = new PlayerCombat();
 
         public int damage { get; private set; }
@@ -69,12 +67,12 @@ namespace firstgame.Entities.Characters
 
         public int getX()
         {
-            return currentPosition.worldPosition.x;
+            return currentPosition.vector2.x;
         } 
 
         public int getY() 
         { 
-            return currentPosition.worldPosition.y;
+            return currentPosition.vector2.y;
         }
 
         

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using firstgame.Entities.Characters;
+using firstgame.Entities.World.WorldInteraction;
 
 namespace firstgame.Entities.World.MapCreation.Levels
 {
@@ -14,10 +15,15 @@ namespace firstgame.Entities.World.MapCreation.Levels
         Fill fill = new Fill();
         Entrance entrance = new Entrance();
 
+        List<WeaponItem> weapons = new List<WeaponItem>();
+        WeaponItem sword = new WeaponItem(new Position(new Vector2(4, 3), 5), Weapon.Sword);
+
 
         List<Enemy> enemies = new List<Enemy>();
         Enemy enemy1 = new Enemy(1, new Position(new Vector2(8, 1), 2), 0);
         Enemy enemy2 = new Enemy(1, new Position(new Vector2(8, 2), 2), 0);
+
+
 
         public Level CreateLevel()
         {
@@ -36,6 +42,10 @@ namespace firstgame.Entities.World.MapCreation.Levels
 
             enemies.Add(enemy1);
             enemies.Add(enemy2);
+
+            weapons.Add(sword);
+
+            level.GenerateItems(weapons);
 
             level.GenerateEnemies(enemies, level);
 

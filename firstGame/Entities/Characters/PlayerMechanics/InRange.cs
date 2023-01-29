@@ -14,10 +14,10 @@ namespace firstgame.Entities.Characters.PlayerMechanics
 
         public bool InRange(Position playerPosition, Position enemyPosition, Weapon weapon, Direction direction)
         {
-            int playerX = playerPosition.worldPosition.x;
-            int playerY = playerPosition.worldPosition.y;
-            int EnemyX = enemyPosition.worldPosition.x;
-            int EnemyY = enemyPosition.worldPosition.y;
+            int playerX = playerPosition.vector2.x;
+            int playerY = playerPosition.vector2.y;
+            int EnemyX = enemyPosition.vector2.x;
+            int EnemyY = enemyPosition.vector2.y;
 
             if (weapon == Weapon.Speer)
             {
