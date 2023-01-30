@@ -13,7 +13,6 @@ namespace firstgame.Entities.World.MapCreation.Levels
     {
         Fill fill = new Fill();
         Entrance entrance = new Entrance();
-        Wall wall = new Wall();
 
         List<Enemy> enemies = new List<Enemy>();
         Enemy enemy1 = new Enemy(1, new Position(new Vector2(5, 6), 2), 0);

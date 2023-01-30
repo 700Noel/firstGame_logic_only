@@ -15,6 +15,8 @@ namespace firstgame.Entities
             Display display = new Display();
             Map map = new MapCreator().GetMap();
 
+            OnPlayerAction onPlayerAction = new OnPlayerAction();
+
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
 
@@ -29,17 +31,23 @@ namespace firstgame.Entities
                 var key = Console.ReadKey(true);
                 switch (key.Key) {
                     case ConsoleKey.UpArrow:
-                        map.currentLevel.Move(Direction.Up); break; 
+                        map.currentLevel.Move(Direction.Up);
+                        onPlayerAction.EnemiesMove(player, map.currentLevel); break;
                     case ConsoleKey.DownArrow:
-                        map.currentLevel.Move(Direction.Down); break;
+                        map.currentLevel.Move(Direction.Down);
+                        onPlayerAction.EnemiesMove(player, map.currentLevel); break;
                     case ConsoleKey.LeftArrow:
-                        map.currentLevel.Move(Direction.Left); break;
+                        map.currentLevel.Move(Direction.Left);
+                        onPlayerAction.EnemiesMove(player, map.currentLevel); break;
                     case ConsoleKey.RightArrow:
-                        map.currentLevel.Move(Direction.Right); break;
+                        map.currentLevel.Move(Direction.Right);
+                        onPlayerAction.EnemiesMove(player, map.currentLevel); break;
                     case ConsoleKey.Spacebar:
-                        player.Combat(map.currentLevel); break;
-                    case ConsoleKey.C:
-                        player.TestWeapon(); break;
+                        player.Combat(map.currentLevel);
+                        onPlayerAction.EnemiesMove(player, map.currentLevel); break;
+
+                    /*case ConsoleKey.C:
+                        player.TestWeapon(); break;*/
 
                         //Step 1. Enemy movement 
                         //Step 2. Change direction, without moving or agroing enemy

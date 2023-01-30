@@ -18,6 +18,8 @@ namespace firstgame.Entities.Characters.PlayerMechanics
 
         public Map worldMap { get; private set; }
 
+        private OnPlayerAction onPlayerAction = new OnPlayerAction();
+
         public Position[,] positions { get; private set; }
 
         public Player fullPlayerData { get; private set; }
