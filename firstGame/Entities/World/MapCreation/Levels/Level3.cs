@@ -16,8 +16,8 @@ namespace firstgame.Entities.World.MapCreation.Levels
         Wall wall = new Wall();
 
         List<Enemy> enemies = new List<Enemy>();
-        Enemy enemy1 = new Enemy(1, new Position(new Vector2(8,2), 2), 0);
-        Enemy enemy2 = new Enemy(1, new Position(new Vector2(8, 2), 2), 0);
+        Enemy enemy1 = new Enemy(1, new Position(new Vector2(5, 6), 2), 0);
+        Enemy enemy2 = new Enemy(1, new Position(new Vector2(6, 6), 2), 0);
 
         public override Level CreateLevel(int borderThickness)
         {
@@ -25,6 +25,10 @@ namespace firstgame.Entities.World.MapCreation.Levels
             entrance.CreateEntranceWithPath(Direction.Left, level);
             entrance.CreateEntrance(Direction.Down, level, 1, borderThickness);
 
+            enemies.Add(enemy1);
+            enemies.Add(enemy2);
+
+            level.GenerateEnemies(enemies, level);
 
             return level;
         }
