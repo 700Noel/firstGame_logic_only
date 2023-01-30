@@ -10,10 +10,11 @@ using firstgame.Entities.World.WorldInteraction;
 
 namespace firstgame.Entities.World.MapCreation.Levels
 {
-    internal class Level2
+    internal class Level2 : LevelCore
     {
         Fill fill = new Fill();
         Entrance entrance = new Entrance();
+        Wall wall = new Wall();
 
         List<WeaponItem> weapons = new List<WeaponItem>();
         WeaponItem sword = new WeaponItem(new Position(new Vector2(4, 3), 5), Weapon.Sword);
@@ -21,24 +22,26 @@ namespace firstgame.Entities.World.MapCreation.Levels
 
         List<Enemy> enemies = new List<Enemy>();
         Enemy enemy1 = new Enemy(1, new Position(new Vector2(8, 1), 2), 0);
-        Enemy enemy2 = new Enemy(1, new Position(new Vector2(8, 2), 2), 0);
+        Enemy enemy2 = new Enemy(1, new Position(new Vector2(10, 2), 2), 0);
 
 
 
-        public Level CreateLevel()
+        public override Level CreateLevel(int borderThickness)
         {
 
-            Level level = fill.CreateBorderLevel(1);
-            entrance.CreateEntrance(Direction.Left, level);
-            entrance.CreateEntrance(Direction.Right, level);
-            level.positions[5, 3].State = PositionState.Obstacle;
+            Level level = fill.CreateBorderLevel(borderThickness);
+            entrance.CreateEntranceWithPath(Direction.Left, level);
+            entrance.CreateEntranceWithPath(Direction.Right, level);
+            wall.CreateWall(5, 6, 3, 6, level);
+
+            /* level.positions[5, 3].State = PositionState.Obstacle;
             level.positions[5, 4].State = PositionState.Obstacle;
             level.positions[6, 3].State = PositionState.Obstacle;
             level.positions[6, 4].State = PositionState.Obstacle;
             level.positions[5, 5].State = PositionState.Obstacle;
             level.positions[5, 6].State = PositionState.Obstacle;
             level.positions[6, 5].State = PositionState.Obstacle;
-            level.positions[6, 6].State = PositionState.Obstacle;
+            level.positions[6, 6].State = PositionState.Obstacle; */
 
             enemies.Add(enemy1);
             enemies.Add(enemy2);

@@ -12,9 +12,9 @@ namespace firstgame.Entities.World.MapCreation
     {
         Map map = new Map(new List<Level>()
             {
-               new StartingLevel1().CreateLevel(),
-               new Level2().CreateLevel(),
-               new Level3().CreateLevel(),
+               new StartingLevel1().CreateLevel(1),
+               new Level2().CreateLevel(1),
+               new Level3().CreateLevel(2),
             });
 
         public Map GetMap() { 

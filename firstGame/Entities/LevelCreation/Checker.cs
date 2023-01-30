@@ -20,15 +20,9 @@ namespace firstgame.Entities.LevelCreation
                 return true;
             }
             return false;
-
         }
         public bool SpaceVertical(int borderThickness, int position, int HEIGHT)
         {
-            /*if (position == HEIGHT / 2 - 1|| position == HEIGHT / 2)
-            {
-                return false;
-            }*/
-
             if (position < borderThickness || position > HEIGHT - 1 - borderThickness)
             {
                 return true;
