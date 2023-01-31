@@ -26,6 +26,8 @@ namespace firstgame.Entities.Characters
 
         Position currentPosition;
 
+        ChangeDirectionInput changeDirectionInput = new ChangeDirectionInput();
+
         
 
         public void TestWeapon()
@@ -54,6 +56,11 @@ namespace firstgame.Entities.Characters
         public void EnemyContact()
         {
             health -= 5;
+        }
+
+        public void ChangeDirection(ConsoleKey key)
+        {
+            changeDirectionInput.Input(key, this);
         }
 
         public Player(string name, int health, Position startPosition, int damage)

@@ -45,14 +45,21 @@ namespace firstgame.Entities
                     case ConsoleKey.Spacebar:
                         player.Combat(map.currentLevel);
                         onPlayerAction.EnemiesMove(player, map.currentLevel); break;
+                    case ConsoleKey.V:
+                        key = Console.ReadKey(true);
+                        player.ChangeDirection(key.Key); break;
 
                     /*case ConsoleKey.C:
                         player.TestWeapon(); break;*/
 
-                        //Step 1. Enemy movement 
-                        //Step 2. Change direction, without moving or agroing enemy
-                        //Step 3. Enemy spawn each time, when Enemy enters
-                        //Step 4. Enemy drop Health
+                        //Step ?. Enemy movement überarbeiten
+                        //Step 1. Enemy Attack
+                        //Step 2. Enemy spawn each time, when Enemy enters
+                        //Step 3. Enemy drop Health
+                        //Step 4. New Enemy Races
+                        //Step 5. friendly NPCs
+                        //Step 6. talk to NPCs
+                        //Step 7. Game Start Text
                 }
             }
         }
