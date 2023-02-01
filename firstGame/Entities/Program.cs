@@ -17,10 +17,7 @@ namespace firstgame.Entities
 
             OnPlayerAction onPlayerAction = new OnPlayerAction();
 
-            Console.WriteLine("Press UpKey, DownKey, LeftKey, RightKey to Move");
-            Console.WriteLine("Press V to Change direction without Moving");
-            Console.ReadKey();
-            Console.Clear();
+            new GameScreens().ComandScreen();
 
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
@@ -50,18 +47,19 @@ namespace firstgame.Entities
                     case ConsoleKey.Spacebar:
                         player.Combat(map.currentLevel);
                         onPlayerAction.EnemiesMove(player, map.currentLevel); break;
-                    case ConsoleKey.V:
+                    case ConsoleKey.C:
                         key = Console.ReadKey(true);
                         player.ChangeDirection(key.Key); break;
+                    case ConsoleKey.B:
+                        onPlayerAction.EnemiesMove(player, map.currentLevel); break;
 
                         //Step ?. Enemy movement überarbeiten
-                        //Step 1. Enemy Attack
-                        //Step 2. Enemy spawn each time, when Enemy enters
-                        //Step 3. Enemy drop Health
-                        //Step 4. New Enemy Races
-                        //Step 5. friendly NPCs
-                        //Step 6. talk to NPCs
-                        //Step 7. Game Start Text
+                        //Step 1. Enemy spawn each time, when Enemy enters
+                        //Step 2. Enemy drop Health
+                        //Step 3. New Enemy Races
+                        //Step 4. friendly NPCs
+                        //Step 5. talk to NPCs
+                        //Step 6. Game Start Text
                 }
             }
         }
