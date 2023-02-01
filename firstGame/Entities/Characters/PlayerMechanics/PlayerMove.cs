@@ -146,7 +146,7 @@ namespace firstgame.Entities.Characters.PlayerMechanics
             var state = positions[position.x, position.y].State;
             if (worldMap.currentLevel.CheckEnemyPosition(position.x, position.y))
             {
-                fullPlayerData.EnemyContact();
+                fullPlayerData.PlayerHit(5);
                 return false;
             }
             else if (state == PositionState.Empty || state == PositionState.Path)

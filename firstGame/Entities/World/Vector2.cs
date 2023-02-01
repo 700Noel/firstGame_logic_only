@@ -8,7 +8,6 @@ namespace firstgame.Entities.World
 {
     public class Vector2
     {
-        private int X, Y;
 
         public int x;
 

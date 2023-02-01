@@ -1,14 +1,19 @@
 ﻿using firstgame.Entities.Enums;
+using firstgame.Entities.World;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Vector2 = firstgame.Entities.World.Vector2;
 
 namespace firstgame.Entities.Characters.EnemyMechanics
 {
     internal class EnemyMovement
     {
+        private bool playerInRange;
+
         public void MoveEnemyTowardsPlayer(Level level, Player player, Enemy enemy)
         {
             int playerX = player.position.vector2.x;
@@ -20,22 +25,24 @@ namespace firstgame.Entities.Characters.EnemyMechanics
             {
                 int differenceX = playerX - enemyX;
                 int differenceY = playerY - enemyY;
-                if(Math.Abs(differenceX) >= Math.Abs(differenceY) && Math.Abs(differenceX) > 1)
+                if(Math.Abs(differenceX) >= Math.Abs(differenceY) )
                 {
-                    if(differenceX > 0 && CheckFreeSpot(level, enemyX + 1, enemyY))
+                    EnemyAttackPlayer(player, enemy);
+                    if(differenceX > 0 && CheckFreeSpot(level, new Vector2(enemyX + 1, enemyY), new Vector2(playerX, playerY)))
                     {
                         enemy.position.vector2.x++;
-                    } else if(CheckFreeSpot(level, enemyX - 1, enemyY))
+                    } else if(CheckFreeSpot(level, new Vector2(enemyX - 1, enemyY), new Vector2(playerX, playerY)))
                     {
                         enemy.position.vector2.x--;
                     }
-                } else if(Math.Abs(differenceY) > 1)
+                } else
                 {
-                    if (differenceY > 0 && CheckFreeSpot(level, enemyX, enemyY + 1))
+                    EnemyAttackPlayer(player, enemy);
+                    if (differenceY > 0 && CheckFreeSpot(level, new Vector2(enemyX, enemyY + 1), new Vector2(playerX, playerY)))
                     {
                         enemy.position.vector2.y++;
                     }
-                    else if(CheckFreeSpot(level, enemyX, enemyY - 1))
+                    else if(CheckFreeSpot(level, new Vector2(enemyX, enemyY - 1), new Vector2(playerX, playerY)))
                     {
                         enemy.position.vector2.y--;
                     }
@@ -43,14 +50,27 @@ namespace firstgame.Entities.Characters.EnemyMechanics
             }
         }
 
-        public bool CheckFreeSpot(Level level, int enemyX, int enemyY)
+        public bool CheckFreeSpot(Level level, Vector2 enemy, Vector2 player)
         {
-            PositionState newPosition = level.positions[enemyX, enemyY].State;
-            if (newPosition == PositionState.Player || newPosition == PositionState.Obstacle || newPosition == PositionState.Path)
+            PositionState newPosition = level.positions[enemy.x, enemy.y].State;
+            if (newPosition == PositionState.Obstacle || newPosition == PositionState.Path)
             {
+                return false;
+            } else if(enemy.x == player.x && enemy.y == player.y)
+            {
+                playerInRange = true;
                 return false;
             }
             return true;
+        }
+
+        private void EnemyAttackPlayer(Player player, Enemy enemy)
+        {
+            if (playerInRange)
+            {
+                player.PlayerHit(enemy.damage);
+                playerInRange = false;
+            }
         }
     }
 }

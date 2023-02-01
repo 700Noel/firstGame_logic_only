@@ -81,6 +81,9 @@ namespace firstgame.Entities
                         Console.Write(" ");
                     }
                     break;
+                case 4:
+                    Console.Write("");
+                        break;
             }
 
             if(y < 4 && map.currentLevel.Enemies().Count != 0 && y < map.currentLevel.Enemies().Count())

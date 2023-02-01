@@ -28,13 +28,6 @@ namespace firstgame.Entities.Characters
 
         ChangeDirectionInput changeDirectionInput = new ChangeDirectionInput();
 
-        
-
-        public void TestWeapon()
-        {
-            weapon = Weapon.Axe;
-        }
-
         public void SetDirection(Direction direction)
         {
             this.direction = direction;
@@ -53,9 +46,9 @@ namespace firstgame.Entities.Characters
 
 
 
-        public void EnemyContact()
+        public void PlayerHit(int damage)
         {
-            health -= 5;
+            health -= damage;
         }
 
         public void ChangeDirection(ConsoleKey key)

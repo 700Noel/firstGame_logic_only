@@ -17,6 +17,11 @@ namespace firstgame.Entities
 
             OnPlayerAction onPlayerAction = new OnPlayerAction();
 
+            Console.WriteLine("Press UpKey, DownKey, LeftKey, RightKey to Move");
+            Console.WriteLine("Press V to Change direction without Moving");
+            Console.ReadKey();
+            Console.Clear();
+
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
 
@@ -48,9 +53,6 @@ namespace firstgame.Entities
                     case ConsoleKey.V:
                         key = Console.ReadKey(true);
                         player.ChangeDirection(key.Key); break;
-
-                    /*case ConsoleKey.C:
-                        player.TestWeapon(); break;*/
 
                         //Step ?. Enemy movement überarbeiten
                         //Step 1. Enemy Attack
