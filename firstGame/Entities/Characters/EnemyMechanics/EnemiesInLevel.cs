@@ -8,5 +8,15 @@ namespace firstgame.Entities.Characters.EnemyMechanics
 {
     internal class EnemiesInLevel
     {
+        List<Enemy> levelEnemies = new List<Enemy>();
+        public void EnemiesList(List<Enemy> enemies)
+        {
+            levelEnemies = enemies;
+        }
+        
+        public List<Enemy> respawningEnemies()
+        {
+            return levelEnemies;
+        }
     }
 }

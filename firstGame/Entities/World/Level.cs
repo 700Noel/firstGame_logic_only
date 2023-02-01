@@ -24,7 +24,9 @@ namespace firstgame.Entities
 
         PlayerMove playerMove = new PlayerMove();
 
-        private List<Enemy> levelEnemies = new List<Enemy>();
+        private List<Enemy> respawningEnemies = new List<Enemy>();
+
+        private List<Enemy> killableEnemies = new List<Enemy>();
 
         private List<WeaponItem> weaponItems = new List<WeaponItem>();
 
@@ -49,7 +51,7 @@ namespace firstgame.Entities
             foreach(Enemy enemy in enemies)
             {
                 if (EnemyInEmpty(enemy.enemyPosition.vector2.x, enemy.enemyPosition.vector2.y, level)) {
-                    levelEnemies.Add(enemy);
+                    respawningEnemies.Add(enemy);
                 }
             }
         }
@@ -62,9 +64,14 @@ namespace firstgame.Entities
             }
         }
 
+        public void LoadAllEnemies()
+        {
+
+        }
+
         public bool CheckEnemyPosition(int x, int y)
         {
-            foreach(Enemy enemy in levelEnemies) 
+            foreach(Enemy enemy in respawningEnemies) 
             {
                 int EnemyX = enemy.position.vector2.x;
                 int EnemyY = enemy.position.vector2.y;

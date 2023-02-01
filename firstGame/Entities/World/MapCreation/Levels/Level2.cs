@@ -34,15 +34,6 @@ namespace firstgame.Entities.World.MapCreation.Levels
             entrance.CreateEntranceWithPath(Direction.Right, level);
             wall.CreateWall(5, 6, 3, 6, level);
 
-            /* level.positions[5, 3].State = PositionState.Obstacle;
-            level.positions[5, 4].State = PositionState.Obstacle;
-            level.positions[6, 3].State = PositionState.Obstacle;
-            level.positions[6, 4].State = PositionState.Obstacle;
-            level.positions[5, 5].State = PositionState.Obstacle;
-            level.positions[5, 6].State = PositionState.Obstacle;
-            level.positions[6, 5].State = PositionState.Obstacle;
-            level.positions[6, 6].State = PositionState.Obstacle; */
-
             enemies.Add(enemy1);
             enemies.Add(enemy2);
 
