@@ -23,6 +23,16 @@ namespace firstgame.Entities.Characters.NPCs
                     health = 30;
                     damage = 5;
                     break;
+                case 2:
+                    race = "";
+                    health = 40;
+                    damage = 10;
+                    break;
+                case 3:
+                    race = "Skeleton";
+                    health = 20;
+                    damage = 20;
+                    break;
                 default:
                     race = "empty";
                     health = 0;

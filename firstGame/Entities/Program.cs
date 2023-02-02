@@ -56,10 +56,9 @@ namespace firstgame.Entities
                         //Step ?. Enemy movement überarbeiten
                         //Step 1. Enemy spawn each time, when Enemy enters
                         //Step 2. Enemy drop Health
-                        //Step 3. New Enemy Races
-                        //Step 4. friendly NPCs
-                        //Step 5. talk to NPCs
-                        //Step 6. Game Start Text
+                        //Step 3. friendly NPCs
+                        //Step 4. talk to NPCs
+                        //Step 5. Game Start Text
                 }
             }
         }

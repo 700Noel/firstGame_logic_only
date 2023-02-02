@@ -52,7 +52,7 @@ namespace firstgame.Entities
         public void RespawnEnemies()
         {
             if(enemiesInLevel != null)
-            enemiesInLevel.respawningEnemies(respawningEnemies);
+            respawningEnemies = enemiesInLevel.GetEnemies();
         }
 
         public void GenerateEnemies(List<Enemy> enemies, Level level)
@@ -126,9 +126,6 @@ namespace firstgame.Entities
             playerMove.getNecasseryData(fullPlayerData, PlayerPosition, size, worldMap, positions, weaponItems);
             playerMove.MovePlayer(direction);
         }
-
-        
-        
 
         public Level(Vector2 size, Position[,] positions)
         {

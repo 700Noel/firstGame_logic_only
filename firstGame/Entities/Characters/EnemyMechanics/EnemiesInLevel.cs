@@ -8,16 +8,21 @@ namespace firstgame.Entities.Characters.EnemyMechanics
 {
     internal class EnemiesInLevel
     {
-        List<Enemy> levelEnemies = new List<Enemy>();
+        List<Enemy> respawningEnemies = new List<Enemy>();
 
         public EnemiesInLevel(List<Enemy> levelEnemies)
         {
-            this.levelEnemies = levelEnemies;
+            foreach(Enemy enemy in levelEnemies)
+            {
+                respawningEnemies.Add(enemy);
+            }
         }
-        
-        public void respawningEnemies(List<Enemy> enemies)
+
+        public List<Enemy> GetEnemies()
         {
-            enemies = levelEnemies;
+            return respawningEnemies;
         }
+
+       
     }
 }
