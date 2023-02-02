@@ -57,6 +57,7 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     {
                         PlayerPosition.x = size.x - 1;
                         worldMap.setCurrentLevel(-1);
+                        worldMap.currentLevel.RespawnEnemies();
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x - 1, PlayerPosition.y)))
                     { 
@@ -75,6 +76,7 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     {
                         PlayerPosition.x = 0;
                         worldMap.setCurrentLevel(1);
+                        worldMap.currentLevel.RespawnEnemies();
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x + 1, PlayerPosition.y)))
                     { 
@@ -93,6 +95,7 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     {
                         PlayerPosition.y = size.y - 1;
                         worldMap.setCurrentLevel(-3);
+                        worldMap.currentLevel.RespawnEnemies();
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y - 1)))
                     { 
@@ -111,6 +114,7 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     {
                         PlayerPosition.y = 0;
                         worldMap.setCurrentLevel(3);
+                        worldMap.currentLevel.RespawnEnemies();
                     }
                     else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y + 1)))
                     { 

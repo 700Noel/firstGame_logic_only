@@ -8,6 +8,7 @@ using firstgame.Entities.World;
 using firstgame.Entities.Characters;
 using firstgame.Entities.Characters.PlayerMechanics;
 using firstgame.Entities.World.WorldInteraction;
+using firstgame.Entities.Characters.EnemyMechanics;
 
 namespace firstgame.Entities
 {
@@ -30,6 +31,8 @@ namespace firstgame.Entities
 
         private List<WeaponItem> weaponItems = new List<WeaponItem>();
 
+        EnemiesInLevel enemiesInLevel;
+
         public Position GetPosition(int x, int y)
         {
             return positions[y, x];
@@ -46,6 +49,12 @@ namespace firstgame.Entities
             worldMap = map;
         }
 
+        public void RespawnEnemies()
+        {
+            if(enemiesInLevel != null)
+            enemiesInLevel.respawningEnemies(respawningEnemies);
+        }
+
         public void GenerateEnemies(List<Enemy> enemies, Level level)
         {
             foreach(Enemy enemy in enemies)
@@ -54,6 +63,7 @@ namespace firstgame.Entities
                     respawningEnemies.Add(enemy);
                 }
             }
+            enemiesInLevel = new EnemiesInLevel(respawningEnemies);
         }
 
         public void GenerateItems(List<WeaponItem> weapons)
@@ -62,11 +72,6 @@ namespace firstgame.Entities
             {
                 weaponItems.Add(weaponItem);
             }
-        }
-
-        public void LoadAllEnemies()
-        {
-
         }
 
         public bool CheckEnemyPosition(int x, int y)
@@ -108,7 +113,7 @@ namespace firstgame.Entities
 
         public List<Enemy> Enemies()
         {
-            return levelEnemies;
+            return respawningEnemies;
         }
 
         public List<WeaponItem> WeaponItems()
