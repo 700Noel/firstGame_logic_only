@@ -1,5 +1,6 @@
 ﻿using firstgame.Entities.Enums;
 using firstgame.Entities.World;
+using firstgame.Entities.World.WorldInteraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +39,14 @@ namespace firstgame.Entities.Characters.PlayerMechanics
         {
             foreach (Enemy enemy in level.Enemies())
             {
-                if (range.InRange(currentPosition, enemy.enemyPosition, weapon, direction))
+                if (range.InRange(currentPosition, enemy.position, weapon, direction))
                 {
                     enemy.DamageEnemy(ReturnDamage());
                     if (enemy.health <= 0)
                     {
                         deleteEnemy = enemy;
                         killEnemy = true;
+                        DropHealth(enemy, level);
                     }
                 }
             }
@@ -53,6 +55,13 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                 level.Enemies().Remove(deleteEnemy);
             }
 
+        }
+
+        private void DropHealth(Enemy enemy, Level level)
+        {
+            Random rnd = new Random();
+            if(rnd.Next(1, 100) <= 50)
+            level.AddItem(new HealthItem(enemy.position, PositionState.Health));
         }
 
         internal int ReturnDamage()

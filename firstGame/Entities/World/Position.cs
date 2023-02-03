@@ -14,10 +14,18 @@ namespace firstgame.Entities.World
 
         public PositionState State { get; set; }
 
+
+
         public Position(Vector2 worldPosition, int state)
         {
             this.vector2 = worldPosition;
             State = PositionStateExtension.GetFromNumber(state);
+        }
+
+        public Position Clone()
+        {
+            Vector2 clonedVector2 = vector2.Clone();
+            return new Position(clonedVector2, PositionStateExtension.ReturnNumber(this.State));
         }
     }
 

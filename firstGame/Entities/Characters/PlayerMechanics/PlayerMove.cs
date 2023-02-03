@@ -26,23 +26,27 @@ namespace firstgame.Entities.Characters.PlayerMechanics
 
         public Vector2 size { get; private set; }
 
+        private int newHealth;
+
+        private HealthItem healthItem;
+
+        private List<HealthItem> healthItems;
+
         private Weapon newWeapon;
 
         private WeaponItem weaponItem;
 
-        private Weapon playerWeapon;
-
         private List<WeaponItem> weapons;
 
-        public void getNecasseryData(Player player, Vector2 playerPosition, Vector2 size, Map map, Position[,] positions, List<WeaponItem> weaponItems)
+        public void getNecasseryData(Player player, Vector2 playerPosition, Vector2 size, Map map, Position[,] positions, List<WeaponItem> weaponItems, List<HealthItem> healthItems)
         {
             fullPlayerData = player;
             this.size = size;
             worldMap = map;
             this.positions = positions;
             this.PlayerPosition = playerPosition;
-            this.playerWeapon = player.weapon;
             weapons = weaponItems;
+            this.healthItems = healthItems;
         }
 
         public void MovePlayer(Direction direction)
@@ -62,10 +66,18 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     else if (CheckCanMove(new Vector2(PlayerPosition.x - 1, PlayerPosition.y)))
                     { 
                         PlayerPosition.x--;
-                        if (CheckItemPosition(weapons, PlayerPosition))
+                        if (CheckItemPosition(weapons, healthItems, PlayerPosition))
                         {
-                            fullPlayerData.SetWeapon(newWeapon);
-                            weaponItem.DestroyItem(worldMap.currentLevel);
+                            if (weaponItem != null)
+                            {
+                                fullPlayerData.SetWeapon(newWeapon);
+                                weaponItem.DestroyItem(worldMap.currentLevel);
+                            }
+                            if (healthItem != null)
+                            {
+                                fullPlayerData.PlayerHeal(newHealth);
+                                healthItem.DestroyItem(worldMap.currentLevel);
+                            }
                         }
                     }
                     break;
@@ -81,11 +93,19 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     else if (CheckCanMove(new Vector2(PlayerPosition.x + 1, PlayerPosition.y)))
                     { 
                         PlayerPosition.x++;
-                        if (CheckItemPosition(weapons, PlayerPosition))
+                        if (CheckItemPosition(weapons, healthItems, PlayerPosition))
                         {
-                            fullPlayerData.SetWeapon(newWeapon);
-                            weaponItem.DestroyItem(worldMap.currentLevel);
-                        }
+                            if(weaponItem != null)
+                            {
+                                fullPlayerData.SetWeapon(newWeapon);
+                                weaponItem.DestroyItem(worldMap.currentLevel);
+                            }
+                            if (healthItem != null)
+                            {
+                                fullPlayerData.PlayerHeal(newHealth);
+                                healthItem.DestroyItem(worldMap.currentLevel);
+                            }
+                         }
                     }
                     break;
 
@@ -100,10 +120,18 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y - 1)))
                     { 
                         PlayerPosition.y--;
-                        if (CheckItemPosition(weapons, PlayerPosition))
+                        if (CheckItemPosition(weapons, healthItems, PlayerPosition))
                         {
-                            fullPlayerData.SetWeapon(newWeapon);
-                            weaponItem.DestroyItem(worldMap.currentLevel);
+                            if (weaponItem != null)
+                            {
+                                fullPlayerData.SetWeapon(newWeapon);
+                                weaponItem.DestroyItem(worldMap.currentLevel);
+                            }
+                            if (healthItem != null)
+                            {
+                                fullPlayerData.PlayerHeal(newHealth);
+                                healthItem.DestroyItem(worldMap.currentLevel);
+                            }
                         }
                     }
                     break;
@@ -119,17 +147,25 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     else if (CheckCanMove(new Vector2(PlayerPosition.x, PlayerPosition.y + 1)))
                     { 
                         PlayerPosition.y++;
-                        if (CheckItemPosition(weapons, PlayerPosition))
+                        if (CheckItemPosition(weapons, healthItems, PlayerPosition))
                         {
-                            fullPlayerData.SetWeapon(newWeapon);
-                            weaponItem.DestroyItem(worldMap.currentLevel);
+                            if (weaponItem != null)
+                            {
+                                fullPlayerData.SetWeapon(newWeapon);
+                                weaponItem.DestroyItem(worldMap.currentLevel);
+                            }
+                            if (healthItem != null)
+                            {
+                                fullPlayerData.PlayerHeal(newHealth);
+                                healthItem.DestroyItem(worldMap.currentLevel);
+                            }
                         }
                     }
                     break;
             }
         }
 
-        private bool CheckItemPosition(List<WeaponItem> weaponItems, Vector2 playerPosition)
+        private bool CheckItemPosition(List<WeaponItem> weaponItems, List<HealthItem> healthItems, Vector2 playerPosition)
         {
             foreach(WeaponItem weaponItem in weaponItems)
             {
@@ -140,6 +176,16 @@ namespace firstgame.Entities.Characters.PlayerMechanics
                     return true;
                 }
             }
+            foreach(HealthItem healthItem in healthItems)
+            {
+                if (healthItem.position.vector2.x == playerPosition.x && healthItem.position.vector2.y == playerPosition.y)
+                {
+                    newHealth = healthItem.GetHealth();
+                    this.healthItem = healthItem;
+                    return true;
+                }
+            }
+            
             return false;
         }
 

@@ -51,6 +51,15 @@ namespace firstgame.Entities.Characters
             health -= damage;
         }
 
+        public void PlayerHeal(int heal)
+        {
+            health += heal;
+            if(health > 100)
+            {
+                health = 100;
+            }
+        }
+
         public void ChangeDirection(ConsoleKey key)
         {
             changeDirectionInput.Input(key, this);

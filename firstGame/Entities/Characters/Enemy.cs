@@ -1,4 +1,5 @@
-﻿using firstgame.Entities.Characters.NPCs;
+﻿using firstgame.Entities.Characters.EnemyMechanics;
+using firstgame.Entities.Characters.NPCs;
 using firstgame.Entities.World;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace firstgame.Entities.Characters
     {
         public string race { get; private set; }
         public int damage { get; private set; }
-        public Position enemyPosition { get; private set; }
+        public Position position { get; private set; }
         public int health { get; private set; }
 
         public byte id { get; private set; }
@@ -23,12 +24,19 @@ namespace firstgame.Entities.Characters
         }
 
 
+        public Enemy Clone()
+        {
+            Position clonedPosition = position.Clone();
+            return new Enemy(this.id, clonedPosition, this.damage);
+        }
+
+
         public Enemy(byte id, Position position, int damage)
             : base(position, damage)
         {
             CreateEnemy create = new CreateEnemy(id);
             this.race = create.GetRace();
-            this.enemyPosition = position;
+            this.position = position;
             this.health = create.GetHealth();
             this.damage = create.GetDamage();
             this.id = id;

@@ -13,7 +13,8 @@ namespace firstgame.Entities.Enums
         Enemy,
         Obstacle,
         Path,
-        Item
+        Weapon,
+        Health
 
     }
 }

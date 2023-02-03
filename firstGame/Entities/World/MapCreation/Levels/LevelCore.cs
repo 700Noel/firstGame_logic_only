@@ -9,5 +9,6 @@ namespace firstgame.Entities.World.MapCreation.Levels
     internal abstract class LevelCore
     {
         public abstract Level CreateLevel(int borderThickness);
+
     }
 }

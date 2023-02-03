@@ -35,7 +35,10 @@ namespace firstgame.Entities
                         currentState = PositionState.Enemy;
                     } else if(map.currentLevel.CheckItemPosition(x,y))
                     {
-                        currentState = PositionState.Item;
+                        currentState = PositionState.Weapon;
+                    } else if (map.currentLevel.CheckHealthPosition(x,y))
+                    {
+                        currentState = PositionState.Health;
                     }
                     else
                     {

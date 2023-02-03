@@ -19,6 +19,11 @@ namespace firstgame.Entities.World
             this.y = y;
         }
 
+        public Vector2 Clone()
+        {
+            return new Vector2(this.x, this.y);
+        }
+
         public static bool operator ==(Vector2 left, Vector2 right)
         {
             return left.x == right.x && left.y == right.y;

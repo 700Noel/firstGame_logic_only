@@ -54,11 +54,10 @@ namespace firstgame.Entities
                         onPlayerAction.EnemiesMove(player, map.currentLevel); break;
 
                         //Step ?. Enemy movement überarbeiten
-                        //Step 1. Enemy spawn each time, when Enemy enters
-                        //Step 2. Enemy drop Health
-                        //Step 3. friendly NPCs
-                        //Step 4. talk to NPCs
-                        //Step 5. Game Start Text
+                        //Step 1. Enemy drop Health
+                        //Step 2. friendly NPCs
+                        //Step 3. talk to NPCs
+                        //Step 4. Game Start Text
                 }
             }
         }

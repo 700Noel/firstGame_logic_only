@@ -19,7 +19,8 @@ namespace firstgame.Extensions
                 PositionState.Enemy => "X ",
                 PositionState.Obstacle => "T ",
                 PositionState.Path => "_ ",
-                PositionState.Item => "W ",
+                PositionState.Weapon => "W ",
+                PositionState.Health => "H ",
                 _ => ""
             };
         }
@@ -32,8 +33,23 @@ namespace firstgame.Extensions
                 2 => PositionState.Enemy,
                 3 => PositionState.Obstacle,
                 4 => PositionState.Path,
-                5 => PositionState.Item,
+                5 => PositionState.Weapon,
+                6 => PositionState.Health,
                 _ => throw new NotImplementedException()
+            };
+        }
+
+        internal static int ReturnNumber(this PositionState state)
+        {
+            return state switch
+            {
+                PositionState.Empty => 0,
+                PositionState.Player => 1,
+                PositionState.Enemy => 2,
+                PositionState.Obstacle => 3,
+                PositionState.Path => 4,
+                PositionState.Weapon => 5,
+                PositionState.Health => 6,
             };
         }
     }
