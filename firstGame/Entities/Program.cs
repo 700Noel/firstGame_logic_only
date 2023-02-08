@@ -17,7 +17,9 @@ namespace firstgame.Entities
 
             OnPlayerAction onPlayerAction = new OnPlayerAction();
 
-            new GameScreens().ComandScreen();
+            //display.ComandScreen();
+
+            display.StartText();
 
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
@@ -54,10 +56,8 @@ namespace firstgame.Entities
                         onPlayerAction.EnemiesMove(player, map.currentLevel); break;
 
                         //Step ?. Enemy movement überarbeiten
-                        //Step 1. Enemy drop Health
-                        //Step 2. friendly NPCs
-                        //Step 3. talk to NPCs
-                        //Step 4. Game Start Text
+                        //Step 1. friendly NPCs
+                        //Step 2. talk to NPCs
                 }
             }
         }

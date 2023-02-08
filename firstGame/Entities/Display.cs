@@ -94,7 +94,52 @@ namespace firstgame.Entities
                 Console.Write("    " + map.currentLevel.Enemies()[y].race + " Health: " + map.currentLevel.Enemies()[y].health.ToString());
             }
         }
+        public void ComandScreen()
+        {
+            Console.WriteLine("Commands: ");
+            Console.WriteLine();
+            Console.WriteLine("Press UpKey, DownKey, LeftKey, RightKey to Move");
+            Console.WriteLine();
+            Console.WriteLine("Press C to Change direction without Moving");
+            Console.WriteLine();
+            Console.WriteLine("Press B to skip a move");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        public void StartText()
+        {
+            string firstPart = "You are lost...";
+            for(int i = 0; i < firstPart.Length; i++)
+            {
+                Console.Write(firstPart[i]);
+                Thread.Sleep(40);
+            }
+            Console.WriteLine();
+            Thread.Sleep(500);
+
+            string secondPart = "You feel tired...";
+            for(int i = 0; i < secondPart.Length; i++)
+            {
+                Console.Write(secondPart[i]);
+                Thread.Sleep(40);
+            }
+            Console.WriteLine();
+            Thread.Sleep(500);
+
+            string thirdPart = "You want to give up!";
+            for(int i = 0; i < thirdPart.Length; i++) 
+            {
+                Console.Write(thirdPart[i]);
+                Thread.Sleep(5);
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+
+        }
     }
+
+
 
 
 
