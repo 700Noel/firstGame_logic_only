@@ -19,7 +19,7 @@ namespace firstgame.Entities
 
             //display.ComandScreen();
 
-            display.StartText();
+            //display.StartText();
 
             Console.Write("Write your name: ");
             string name = Console.ReadLine();
@@ -55,9 +55,9 @@ namespace firstgame.Entities
                     case ConsoleKey.B:
                         onPlayerAction.EnemiesMove(player, map.currentLevel); break;
 
-                        //Step ?. Enemy movement überarbeiten
-                        //Step 1. friendly NPCs
-                        //Step 2. talk to NPCs
+                        //Step 1. Enemy movement überarbeiten
+                        //Step 2. friendly NPCs
+                        //Step 3. talk to NPCs
                 }
             }
         }

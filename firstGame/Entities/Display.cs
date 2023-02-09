@@ -42,7 +42,7 @@ namespace firstgame.Entities
                     }
                     else
                     {
-                        currentState = map.currentLevel.GetPosition(y, x).State;
+                        currentState = map.currentLevel.GetPosition(x, y).State;
                     }
                     Console.Write(currentState.AsString());
                 }

@@ -33,7 +33,7 @@ namespace firstgame.Entities
 
         public List<HealthItem> healthItems = new List<HealthItem>();
 
-        public Position GetPosition(int x, int y)
+        public Position GetPosition(int y, int x)
         {
             return positions[y, x];
         }
