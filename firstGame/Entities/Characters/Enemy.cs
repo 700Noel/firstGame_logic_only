@@ -23,6 +23,11 @@ namespace firstgame.Entities.Characters
             this.health -= newHealth;
         }
 
+        public void SetEnemyPosition(Position position)
+        {
+            this.position = position.Clone();
+        }
+
 
         public Enemy Clone()
         {

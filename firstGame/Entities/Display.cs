@@ -92,6 +92,7 @@ namespace firstgame.Entities
             if(y < 4 && map.currentLevel.Enemies().Count != 0 && y < map.currentLevel.Enemies().Count())
             {
                 Console.Write("    " + map.currentLevel.Enemies()[y].race + " Health: " + map.currentLevel.Enemies()[y].health.ToString());
+                Console.Write("    " + map.currentLevel.Enemies()[y].race + " Position x/y: " + map.currentLevel.Enemies()[y].position.vector2.x.ToString() + "/" + map.currentLevel.Enemies()[y].position.vector2.y.ToString());
             }
         }
         public void ComandScreen()

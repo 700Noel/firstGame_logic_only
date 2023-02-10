@@ -11,7 +11,7 @@ namespace firstgame.Entities
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(80, 13);
+            Console.SetWindowSize(180, 13);
             Display display = new Display();
             Map map = new MapCreator().GetMap();
 
