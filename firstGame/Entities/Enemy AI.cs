@@ -5,7 +5,8 @@ namespace firstgame.Entities
 {
     internal class Enemy_AI
     {
-        bool playerInRange;
+        private bool playerInRange;
+        private bool unreachable;
         private Level currentlevel;
         private Position playerPosition;
 
@@ -22,6 +23,7 @@ namespace firstgame.Entities
         public List<Position> generatePath(Position enemyPosition, Position playerPosition, Level level)
         {
             this.playerInRange = false;
+            this.unreachable = false;
             openList.Clear();
             closedList.Clear();
             path.Clear();
@@ -38,8 +40,9 @@ namespace firstgame.Entities
             openList.Remove(parent);
             closedList.Add(parent);
 
-            while (!playerInRange)
+            while (!playerInRange && !unreachable)
             {
+
 
                 foreach (Node node in openList)
                 {
@@ -58,6 +61,13 @@ namespace firstgame.Entities
                 }
 
                 AddAdjecentNodes();
+
+                if (openList.Count() == 0 && !playerInRange)
+                {
+                    unreachable = true;
+                    path.Clear();
+                    return path;
+                }
             }
             while (parent.getPosition() != enemyPosition)
             {
