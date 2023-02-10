@@ -21,6 +21,12 @@ namespace firstgame.Entities
 
         public List<Position> generatePath(Position enemyPosition, Position playerPosition, Level level)
         {
+            this.playerInRange = false;
+            openList.Clear();
+            closedList.Clear();
+            path.Clear();
+
+
             this.currentlevel = level;
             this.playerPosition = playerPosition;
             startingPoint = enemyPosition.vector2;
