@@ -28,9 +28,17 @@ namespace firstgame.Entities
                     if (positions.Count() > 1)
                     {
                         enemy.SetEnemyPosition(positions.Last());
+                    } else if(positions.Count() == 1)
+                    {
+                        EnemyAttackPlayer(player, enemy);
                     }
                 }
             }
+        }
+
+        private void EnemyAttackPlayer(Player player, Enemy enemy)
+        {
+            player.PlayerHit(enemy.damage);
         }
     }
 }

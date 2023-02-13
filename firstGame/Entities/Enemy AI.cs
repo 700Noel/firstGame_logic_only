@@ -110,7 +110,7 @@ namespace firstgame.Entities
 
             if (parent.getVector2().y - 1 >= 0 && CheckFreeSpot(currentlevel, parent.getVector2(), playerPosition.vector2))
             {
-                adjacentNode = new Node(parent, currentlevel.GetPosition(parent.getVector2().x - 1, parent.getVector2().y), playerPosition);
+                adjacentNode = new Node(parent, currentlevel.GetPosition(parent.getVector2().x, parent.getVector2().y - 1), playerPosition);
                 if (!OpenListContains(adjacentNode.getPosition()) && !ClosedListContains(adjacentNode.getPosition()))
                 {
                     openList.Add(adjacentNode);
@@ -138,7 +138,7 @@ namespace firstgame.Entities
                 if (node.getPosition().vector2.y == position.vector2.y && node.getPosition().vector2.x == position.vector2.x)
                 {
                     return true;
-                }
+                 }
             }
             return false;
         }
