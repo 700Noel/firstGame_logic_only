@@ -25,10 +25,13 @@ namespace firstgame.Entities
                 {
                     //enemyMovement.MoveEnemyTowardsPlayer(level, player, enemy);
                     positions = enemy_AI.generatePath(enemy.position, player.position, level);
-                    if (positions.Count() > 1)
+                    if(positions == null)
+                    {
+                       continue;
+                    } else if (positions.Count() >= 1)
                     {
                         enemy.SetEnemyPosition(positions.Last());
-                    } else if(positions.Count() == 1)
+                    } else if(positions.Count() == 0)
                     {
                         EnemyAttackPlayer(player, enemy);
                     }

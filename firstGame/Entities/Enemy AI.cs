@@ -1,10 +1,15 @@
-﻿using firstgame.Entities.Enums;
+﻿using firstgame.Entities.Characters;
+using firstgame.Entities.Enums;
 using firstgame.Entities.World;
+using firstgame.Exceptions;
 
 namespace firstgame.Entities
 {
     internal class Enemy_AI
     {
+        private int openListNoChange;
+        private int closedListNoChange;
+
         private bool playerInRange;
         private bool unreachable;
         private Level currentlevel;
@@ -32,6 +37,7 @@ namespace firstgame.Entities
             this.currentlevel = level;
             this.playerPosition = playerPosition;
             startingPoint = enemyPosition.vector2;
+
             parent = new Node(null, enemyPosition, playerPosition);
             openList.Add(parent);
 
@@ -42,11 +48,13 @@ namespace firstgame.Entities
 
             while (!playerInRange && !unreachable)
             {
-
+                closedListNoChange = closedList.Count();
+                openListNoChange = openList.Count();
 
                 foreach (Node node in openList)
                 {
-                    if (node.getF() > bestPath)
+                    if (bestPath == 0) bestPath = node.getF();
+                    if (node.getF() <= bestPath)
                     {
                         parent = node;
                         bestPath = node.getF();
@@ -66,7 +74,12 @@ namespace firstgame.Entities
                 {
                     unreachable = true;
                     path.Clear();
-                    return path;
+                    return null;
+                }
+
+                if(openList.Count() == openListNoChange && closedList.Count() == closedListNoChange && !playerInRange)
+                {
+                    throw new PathfindingStuckException();
                 }
             }
             while (parent.getPosition() != enemyPosition)
@@ -80,7 +93,7 @@ namespace firstgame.Entities
 
         private void AddAdjecentNodes()
         {
-            if (parent.getVector2().x + 1 < 12 && CheckFreeSpot(currentlevel, parent.getVector2(), playerPosition.vector2))
+            if (parent.getVector2().x + 1 < 12 && CheckFreeSpot(currentlevel, new Vector2(parent.getVector2().x + 1, parent.getVector2().y), playerPosition.vector2))
             {
                 adjacentNode = new Node(parent, currentlevel.GetPosition(parent.getVector2().x + 1, parent.getVector2().y), playerPosition);
                 if (!OpenListContains(adjacentNode.getPosition()) && !ClosedListContains(adjacentNode.getPosition()))
@@ -90,7 +103,7 @@ namespace firstgame.Entities
             }
 
 
-            if (parent.getVector2().x - 1 >= 0 && CheckFreeSpot(currentlevel, parent.getVector2(), playerPosition.vector2))
+            if (parent.getVector2().x - 1 >= 0 && CheckFreeSpot(currentlevel, new Vector2(parent.getVector2().x - 1, parent.getVector2().y), playerPosition.vector2))
             {
                 adjacentNode = new Node(parent, currentlevel.GetPosition(parent.getVector2().x - 1, parent.getVector2().y), playerPosition);
                 if (!OpenListContains(adjacentNode.getPosition()) && !ClosedListContains(adjacentNode.getPosition()))
@@ -99,7 +112,7 @@ namespace firstgame.Entities
                 }
             }
 
-            if (parent.getVector2().y + 1 < 8 && CheckFreeSpot(currentlevel, parent.getVector2(), playerPosition.vector2))
+            if (parent.getVector2().y + 1 < 8 && CheckFreeSpot(currentlevel, new Vector2(parent.getVector2().x, parent.getVector2().y + 1), playerPosition.vector2))
             {
                 adjacentNode = new Node(parent, currentlevel.GetPosition(parent.getVector2().x, parent.getVector2().y + 1), playerPosition);
                 if (!OpenListContains(adjacentNode.getPosition()) && !ClosedListContains(adjacentNode.getPosition()))
@@ -108,7 +121,7 @@ namespace firstgame.Entities
                 }
             }
 
-            if (parent.getVector2().y - 1 >= 0 && CheckFreeSpot(currentlevel, parent.getVector2(), playerPosition.vector2))
+            if (parent.getVector2().y - 1 >= 0 && CheckFreeSpot(currentlevel, new Vector2(parent.getVector2().x, parent.getVector2().y - 1), playerPosition.vector2))
             {
                 adjacentNode = new Node(parent, currentlevel.GetPosition(parent.getVector2().x, parent.getVector2().y - 1), playerPosition);
                 if (!OpenListContains(adjacentNode.getPosition()) && !ClosedListContains(adjacentNode.getPosition()))
@@ -129,6 +142,8 @@ namespace firstgame.Entities
             }
             return false;
         }
+
+
 
 
         private bool OpenListContains(Position position)
@@ -154,6 +169,15 @@ namespace firstgame.Entities
             {
                 playerInRange = true;
                 return false;
+            } else 
+            {
+                foreach(Enemy enemies in level.Enemies())
+                {
+                    if(enemies.position.vector2.x == enemy.x && enemies.position.vector2.y == enemy.y)
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
         }
